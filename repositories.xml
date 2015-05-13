@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[ring-overlay]]></name>
+    <description lang="en"><![CDATA[Ring Overlay]]></description>
+    <homepage>http://github.com/stefan-langenmaier/ring-overlay</homepage>
+    <owner type="person">
+      <email>stefan.langenmaier@gmail.com</email>
+      <name><![CDATA[Stefan Langenmaier]]></name>
+    </owner>
+    <source type="git">git://github.com/stefan-langenmaier/ring-overlay.git</source>
+    <feed>http://github.com/stefan-langenmaier/ring-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>
