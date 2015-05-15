@@ -19,7 +19,8 @@ KEYWORDS="~x86 ~amd64"
 
 IUSE=""
 
-DEPEND="dev-libs/dbus-c++"
+DEPEND="dev-libs/dbus-c++
+	dev-cpp/yaml-cpp"
 
 RDEPEND="${DEPEND}"
 

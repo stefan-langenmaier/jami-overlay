@@ -19,7 +19,8 @@ KEYWORDS="~x86 ~amd64"
 
 IUSE=""
 
-DEPEND="net-voip/ring-daemon"
+DEPEND="net-voip/ring-daemon
+	>=dev-qt/qtdbus-5"
 
 RDEPEND="${DEPEND}"
 
@@ -28,7 +29,8 @@ RDEPEND="${DEPEND}"
 src_configure() {
 	mkdir build
 	cd build
-	cmake .. -DRING_BUILD_DIR=$RING -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
+#	cmake .. -DRING_BUILD_DIR="$S/ring" -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
+	cmake .. -DRING_BUILD_DIR="$S/ring" -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
 }
 
 src_compile() {
