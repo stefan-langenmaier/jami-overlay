@@ -9,7 +9,7 @@ inherit eutils git-2 cmake-utils
 DESCRIPTION="libringclient is the common interface for Ring applications"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/libringclient/wiki"
 
-EGIT_REPO_URI="git://anongit.kde.org/libringclient"
+EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-lrc"
 SRC_URI=""
 
 LICENSE="GPL-3"
