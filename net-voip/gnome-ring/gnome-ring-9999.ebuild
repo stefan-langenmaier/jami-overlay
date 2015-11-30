@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils git-2 cmake-utils
+inherit eutils git-2 cmake-utils gnome2-utils
 
 DESCRIPTION="Gnome Ring client"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-gnome-client/wiki"
@@ -36,7 +36,7 @@ RDEPEND="${DEPEND}
 src_configure() {
 	mkdir build
 	cd build
-	cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+	cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DGSETTINGS_COMPILE=OFF
 }
 
 src_compile() {
@@ -47,4 +47,16 @@ src_compile() {
 src_install() {
 	cd build
 	make DESTDIR="${D}" install
+}
+
+pkg_preinst() {
+   gnome2_schemas_savelist
+}
+
+pkg_postinst() {
+   gnome2_schemas_update
+}
+
+pkg_postrm() {
+   gnome2_schemas_update
 }
