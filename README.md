@@ -1,11 +1,14 @@
 # How to use this overlay
 
-Add `https://raw.github.com/stefan-langenmaier/ring-overlay/master/repositories.xml` to overlays section in `/etc/layman/layman.cfg`.
+[Local overlays](https://wiki.gentoo.org/wiki/Overlay/Local_overlay) should be managed via `/etc/portage/repos.conf/`.
+To enable this overlay make sure you are using a recent Portage version (at least `2.2.14`), and create an `/etc/portage/repos.conf/ring-overlay.conf` file containing precisely:
 
-Or read the instructions on the [Gentoo Wiki](http://wiki.gentoo.org/wiki/Layman#Adding_custom_overlays), then invoke the following:
+```
+[ring-overlay]
+location = /usr/local/portage/ring-overlay
+sync-type = git
+sync-uri = https://github.com/stefan-langenmaier/ring-overlay.git
+priority=9999
+```
 
-	layman -f -a ring-overlay
-
-After performing those steps, the following should work (or any other package from this overlay):
-
-	sudo emerge -av net-voip/gnome-ring
+Afterwards, simply run `emerge --sync`, and Portage should seamlessly make all our ebuilds available.
