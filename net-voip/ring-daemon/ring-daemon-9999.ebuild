@@ -20,7 +20,11 @@ KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="dev-libs/dbus-c++
-	dev-cpp/yaml-cpp"
+	dev-cpp/yaml-cpp
+	net-libs/pjproject
+	dev-libs/jsoncpp
+	net-libs/opendht
+	media-libs/libsamplerate"
 
 RDEPEND="${DEPEND}"
 
