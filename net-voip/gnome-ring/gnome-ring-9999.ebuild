@@ -24,11 +24,13 @@ DEPEND=""
 RDEPEND="${DEPEND}
 	net-libs/libringclient
 	media-libs/clutter-gtk
+	media-gfx/qrencode
 	>=dev-qt/qtcore-5
 	>=dev-qt/qtgui-5
 	>=dev-qt/qtwidgets-5
 	x11-themes/gnome-icon-theme
 	app-text/libebook
+	x11-libs/libnotify
 "
 
 #S=${WORKDIR}/${P}
