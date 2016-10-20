@@ -19,15 +19,19 @@ KEYWORDS="~x86 ~amd64"
 
 IUSE=""
 
-#boost should be at 1.61
 DEPEND=">=dev-libs/boost-1.56.0
 	>dev-libs/jsoncpp-1.7
 	dev-libs/dbus-c++
 	dev-cpp/yaml-cpp
 	media-sound/gsm
+	media-libs/libsamplerate
 	x11-libs/libva"
-#	media-libs/ffmpeg[v4l,vaapi,vdpau]"
+
+#	media-libs/ffmpeg[v4l,vaapi,vdpau]
 #	dev-libs/gmp
+#	net-libs/opendht
+#	>=net-libs/pjproject-2.5.5
+#	boost should be at 1.61
 
 RDEPEND="${DEPEND}"
 
