@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 IUSE=""
 
@@ -43,7 +43,11 @@ src_configure() {
 	cd "$S"/contrib
 
 	# boost is failing with a compilation error
-	rm -r src/boost
+	# patch boost
+#	cd $< && $(HOSTVARS) ./b2 $(BOOST_B2_OPTS) --ignore-site-config install
+	sed -i.bak 's/\.\/b2/\.\/b2 --ignore-site-config /g' src/boost/rules.mak
+
+#	rm -r src/boost
 #	rm -r src/ffmpeg
 #	rm -r src/gmp
 	mkdir build
