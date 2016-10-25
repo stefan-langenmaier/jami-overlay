@@ -29,7 +29,7 @@ RDEPEND="${DEPEND}
 	>=dev-qt/qtgui-5
 	>=dev-qt/qtwidgets-5
 	x11-themes/gnome-icon-theme
-	app-text/libebook
+	gnome-extra/evolution-data-server
 	x11-libs/libnotify
 "
 
