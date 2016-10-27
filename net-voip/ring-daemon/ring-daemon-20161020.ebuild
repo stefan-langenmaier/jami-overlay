@@ -123,6 +123,8 @@ src_configure() {
 
 	if use system-iconv; then
 		rm -r src/iconv
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)iconv $(DEPS_iconv)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)iconv\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-jsoncpp; then
@@ -148,6 +150,8 @@ src_configure() {
 
 	if use system-opus; then
 		rm -r src/opus
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_opus)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)opus\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-pcre; then
@@ -168,6 +172,8 @@ src_configure() {
 
 	if use system-speex; then
 		rm -r src/speex
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_speex)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)speex\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-upnp; then
@@ -180,10 +186,14 @@ src_configure() {
 
 	if use system-vpx; then
 		rm -r src/vpx
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_vpx)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)vpx\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-x264; then
 		rm -r src/x264
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)x264 $(DEPS_x264)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)x264\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-yaml-cpp; then
@@ -192,6 +202,8 @@ src_configure() {
 
 	if use system-zlib; then
 		rm -r src/zlib
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)zlib $(DEPS_zlib)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)zlib\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-gnutls; then
