@@ -14,7 +14,7 @@ SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161020.1.42bef36.tar.gz
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 IUSE=""
 
@@ -46,17 +46,17 @@ src_compile() {
 
 src_install() {
 	cd build
-	default	
+	default
 }
 
 pkg_preinst() {
-   gnome2_schemas_savelist
+	gnome2_schemas_savelist
 }
 
 pkg_postinst() {
-   gnome2_schemas_update
+	gnome2_schemas_update
 }
 
 pkg_postrm() {
-   gnome2_schemas_update
+	gnome2_schemas_update
 }

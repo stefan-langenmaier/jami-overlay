@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit autotools eutils
+inherit eutils
 
 DESCRIPTION="Ring daemon"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-daemon/wiki"
@@ -16,12 +16,11 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="system-asio system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
+IUSE="system-asio system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
 
 DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 	system-boost? ( >=dev-libs/boost-1.56.0 )
 	system-cryptopp? ( >=dev-libs/crypto++-5.6.5 )
-	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi,vdpau] )
 	system-flac? ( >=media-libs/flac-1.3.0 )
 	system-gcrypt? ( >=dev-libs/libgcrypt-1.6.5 )
 	system-gmp? ( >=dev-libs/gmp-6.1.0 )
@@ -51,12 +50,11 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 
 # msgpack commit equals 2.0.0 but it only tests for 1.1
 # boost should be at 1.61
+#	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi,vdpau] )
 
 #	system-pjproject? (
 #		>=net-libs/pjproject-2.4.5[-oss,-alsa,-sdl,-ffmpeg,-v4l2,-openh264,-libyuv,portaudio,-speex,-g711,-l16,-gsm,-g722,-g7221,-ilbc,-amr,-silk,-resample,ssl]
 #                >=net-libs/gnutls-3.4.14 )
-
-
 # restbed
 # speexdsp
 # uuid
@@ -69,7 +67,7 @@ src_configure() {
 	cd contrib
 
 	# remove folders for other OSes
-	#android
+	# android
 	rm -r src/natpmp
 	rm -r src/libav
 
@@ -92,9 +90,9 @@ src_configure() {
 		rm -r src/cryptopp
 	fi
 
-	if use system-ffmpeg; then
-		rm -r src/ffmpeg
-	fi
+#	if use system-ffmpeg; then
+#		rm -r src/ffmpeg
+#	fi
 
 	if use system-flac; then
 		rm -r src/flac
@@ -225,9 +223,5 @@ src_configure() {
 	sed -i.bak 's/LIBS = \(.*\)$/LIBS = \1 -lopus /g' bin/Makefile
 }
 
-src_compile() {
-	emake
-}
-
-# add a log warning if
+# TODO add a log warning if
 # system-ffmpeg overwriting a patched dep I hope you know what you are doing

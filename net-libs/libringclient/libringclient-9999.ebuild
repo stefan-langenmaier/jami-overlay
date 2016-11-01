@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
-inherit eutils git-2 cmake-utils
+inherit eutils git-r3 cmake-utils
 
 DESCRIPTION="libringclient is the common interface for Ring applications"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/libringclient/wiki"
@@ -15,30 +15,27 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 IUSE=""
 
-DEPEND="net-voip/ring-daemon
+DEPEND="=net-voip/ring-daemon-9999
 	>=dev-qt/qtdbus-5"
 
 RDEPEND="${DEPEND}"
 
-#S=${WORKDIR}/${P}
-
 src_configure() {
 	mkdir build
 	cd build
-#	cmake .. -DRING_BUILD_DIR="$S/ring" -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
 	cmake .. -DRING_BUILD_DIR="$S/ring" -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug
 }
 
 src_compile() {
 	cd build
-	make
+	emake
 }
 
 src_install() {
 	cd build
-	make DESTDIR="${D}" install
+	default
 }

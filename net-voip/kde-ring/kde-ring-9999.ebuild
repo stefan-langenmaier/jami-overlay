@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils git-2 cmake-utils
+inherit eutils git-r3 cmake-utils
 
 DESCRIPTION="KDE Ring client"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-kde-client/wiki"
@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 IUSE=""
 

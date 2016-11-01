@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils git-2 cmake-utils gnome2-utils
+inherit eutils git-r3 cmake-utils gnome2-utils
 
 DESCRIPTION="Gnome Ring client"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-gnome-client/wiki"
@@ -15,14 +15,11 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64"
 
 IUSE=""
 
-DEPEND=""
-
-RDEPEND="${DEPEND}
-	net-libs/libringclient
+DEPEND="=net-libs/libringclient-9999
 	media-libs/clutter-gtk
 	media-gfx/qrencode
 	>=dev-qt/qtcore-5
@@ -32,6 +29,8 @@ RDEPEND="${DEPEND}
 	gnome-extra/evolution-data-server
 	x11-libs/libnotify
 "
+
+RDEPEND="${DEPEND}"
 
 #S=${WORKDIR}/${P}
 
@@ -43,22 +42,22 @@ src_configure() {
 
 src_compile() {
 	cd build
-	make
+	default
 }
 
 src_install() {
 	cd build
-	make DESTDIR="${D}" install
+	default
 }
 
 pkg_preinst() {
-   gnome2_schemas_savelist
+	gnome2_schemas_savelist
 }
 
 pkg_postinst() {
-   gnome2_schemas_update
+	gnome2_schemas_update
 }
 
 pkg_postrm() {
-   gnome2_schemas_update
+	gnome2_schemas_update
 }
