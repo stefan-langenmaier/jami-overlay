@@ -15,14 +15,11 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 IUSE=""
 
-DEPEND=""
-
-RDEPEND="${DEPEND}
-	net-libs/libringclient
+DEPEND="=net-libs/libringclient-99999999
 	>=dev-qt/qtcore-5
 	>=dev-qt/qtgui-5
 	>=dev-qt/qtwidgets-5
@@ -31,6 +28,8 @@ RDEPEND="${DEPEND}
 	kde-frameworks/kio
 	>=kde-frameworks/extra-cmake-modules-1.1.0
 "
+
+RDEPEND="${DEPEND}"
 
 #S=${WORKDIR}/${P}
 

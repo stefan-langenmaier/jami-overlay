@@ -15,11 +15,11 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 IUSE=""
 
-DEPEND="=net-voip/ring-daemon-9999
+DEPEND="=net-voip/ring-daemon-99999999
 	>=dev-qt/qtdbus-5"
 
 RDEPEND="${DEPEND}"

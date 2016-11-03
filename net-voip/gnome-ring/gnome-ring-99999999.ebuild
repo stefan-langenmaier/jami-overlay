@@ -15,11 +15,11 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 IUSE=""
 
-DEPEND="=net-libs/libringclient-9999
+DEPEND="=net-libs/libringclient-99999999
 	media-libs/clutter-gtk
 	media-gfx/qrencode
 	>=dev-qt/qtcore-5

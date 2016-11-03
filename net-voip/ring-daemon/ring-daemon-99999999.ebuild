@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
-EAPI=5
+EAPI=6
 
-inherit autotools eutils git-2
+inherit eutils git-r3
 
 DESCRIPTION="Ring daemon"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-daemon/wiki"
@@ -15,7 +15,7 @@ SRC_URI=""
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 IUSE=""
 
