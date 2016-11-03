@@ -1,8 +1,8 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 inherit eutils versionator git-r3 cmake-utils
 
@@ -16,7 +16,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 
-DEPEND=">=dev-libs/msgpack-1.2
+DEPEND=">=dev-libs/msgpack-2.0
 	>=dev-libs/nettle-3
 	net-libs/gnutls"
 RDEPEND="${DEPEND}"

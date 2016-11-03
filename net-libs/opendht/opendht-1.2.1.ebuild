@@ -16,7 +16,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND=">=dev-libs/msgpack-1.2
+DEPEND=">=dev-libs/msgpack-2.0
 	>=dev-libs/nettle-3
 	net-libs/gnutls"
 RDEPEND="${DEPEND}"
