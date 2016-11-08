@@ -9,7 +9,7 @@ inherit eutils
 DESCRIPTION="Ring daemon"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-daemon/wiki"
 
-SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161020.1.42bef36.tar.gz"
+SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161104.4.17a0616.tar.gz"
 
 LICENSE="GPL-3"
 
@@ -29,7 +29,7 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 	system-iconv? ( >=dev-libs/libiconv-1.14 )
 	system-jack? ( >=media-sound/jack-audio-connection-kit-0.121.3 )
 	system-jsoncpp? ( >=dev-libs/jsoncpp-1.7.2 )
-	system-msgpack? ( >=dev-libs/msgpack-1.1.0 )
+	system-msgpack? ( >=dev-libs/msgpack-2.0.0 )
 	system-nettle? ( >=dev-libs/nettle-3.1 )
 	system-ogg? ( >=media-libs/libogg-1.3.1 )
 	system-opendht? ( >=net-libs/opendht-0.6.3 )
@@ -48,7 +48,6 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 	dev-libs/dbus-c++
 	x11-libs/libva"
 
-# msgpack commit equals 2.0.0 but it only tests for 1.1
 # boost should be at 1.61
 #	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi,vdpau] )
 

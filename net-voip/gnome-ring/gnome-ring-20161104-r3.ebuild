@@ -9,7 +9,7 @@ inherit eutils cmake-utils gnome2-utils
 DESCRIPTION="Gnome Ring client"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-gnome-client/wiki"
 
-SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161020.1.42bef36.tar.gz"
+SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161104.4.17a0616.tar.gz"
 
 LICENSE="GPL-3"
 
@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 
 IUSE=""
 
-DEPEND="=net-libs/libringclient-20161020
+DEPEND="=net-libs/libringclient-${PVR}
 	media-libs/clutter-gtk
 	media-gfx/qrencode
 	>=dev-qt/qtcore-5

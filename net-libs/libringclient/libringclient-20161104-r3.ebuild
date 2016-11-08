@@ -9,7 +9,7 @@ inherit eutils cmake-utils
 DESCRIPTION="libringclient is the common interface for Ring applications"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/libringclient/wiki"
 
-SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161020.1.42bef36.tar.gz"
+SRC_URI="https://dl.ring.cx/ring-release/tarballs/ring_20161104.4.17a0616.tar.gz"
 
 LICENSE="GPL-3"
 
@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 
 IUSE=""
 
-DEPEND="=net-voip/ring-daemon-20161020
+DEPEND="=net-voip/ring-daemon-${PVR}
 	>=dev-qt/qtdbus-5"
 
 RDEPEND="${DEPEND}"
