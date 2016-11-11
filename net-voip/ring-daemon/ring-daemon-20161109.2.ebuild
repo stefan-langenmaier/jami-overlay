@@ -225,5 +225,11 @@ src_configure() {
 	sed -i.bak 's/LIBS = \(.*\)$/LIBS = \1 -lopus /g' bin/Makefile
 }
 
+
+src_install() {
+	default
+	rm "${D}usr/lib/libring.la"
+}
+
 # TODO add a log warning if
 # system-ffmpeg overwriting a patched dep I hope you know what you are doing
