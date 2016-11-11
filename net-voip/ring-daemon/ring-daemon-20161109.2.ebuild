@@ -48,7 +48,7 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 	system-zlib? ( >=sys-libs/zlib-1.2.8 )
 	system-gnutls? ( >=net-libs/gnutls-3.4.14 )
 	dev-libs/dbus-c++
-	media-sound/pulseaudio
+	|| ( media-sound/pulseaudio media-sound/apulse )
 	x11-libs/libva"
 
 # boost should be at 1.61
