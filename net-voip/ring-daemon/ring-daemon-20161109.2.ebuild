@@ -225,7 +225,6 @@ src_configure() {
 	sed -i.bak 's/LIBS = \(.*\)$/LIBS = \1 -lopus /g' bin/Makefile
 }
 
-
 src_install() {
 	default
 	rm "${D}usr/lib/libring.la"
