@@ -10,17 +10,16 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="git://anongit.kde.org/ring-kde"
 	SRC_URI=""
 
-        KEYWORDS=""
+	KEYWORDS=""
 else
-        inherit eutils cmake-utils gnome2-utils
+	inherit eutils cmake-utils
 
-        COMMIT_HASH=""
-        MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
-        SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
+	COMMIT_HASH=""
+	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
+	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-        KEYWORDS="~amd64"
+	KEYWORDS="~amd64"
 fi
-
 
 DESCRIPTION="KDE Ring client"
 HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-kde-client/wiki"
@@ -31,19 +30,19 @@ SLOT="0"
 
 IUSE=""
 
-DEPEND="=net-libs/libringclient-${PVR}
+DEPEND="net-libs/libringclient
 	>=dev-qt/qtcore-5
 	>=dev-qt/qtgui-5
 	>=dev-qt/qtwidgets-5
 	>=dev-qt/qtsvg-5
 	kde-frameworks/kinit
 	kde-frameworks/kio
+	kde-frameworks/knotifications
+	kde-frameworks/knotifyconfig
 	>=kde-frameworks/extra-cmake-modules-1.1.0
 "
 
 RDEPEND="${DEPEND}"
-
-S=${WORKDIR}/ring-project/client-kde
 
 src_configure() {
 	mkdir build
