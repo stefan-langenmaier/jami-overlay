@@ -32,4 +32,3 @@ GR="net-voip/gnome-ring/gnome-ring-"
 cp ${GR}99999999.ebuild ${GR}$VERSION.ebuild
 sed -i "s/\tCOMMIT_HASH=\"\"$/\tCOMMIT_HASH=\"$REV\"/" ${GR}$VERSION.ebuild
 ebuild ${GR}$VERSION.ebuild manifest
-
