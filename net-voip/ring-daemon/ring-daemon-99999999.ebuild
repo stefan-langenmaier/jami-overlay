@@ -24,7 +24,7 @@ else
 fi
 
 DESCRIPTION="Ring daemon"
-HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-daemon/wiki"
+HOMEPAGE="https://tuleap.ring.cx/projects/ring"
 
 LICENSE="GPL-3"
 

@@ -22,7 +22,7 @@ else
 fi
 
 DESCRIPTION="libringclient is the common interface for Ring applications"
-HOMEPAGE="https://projects.savoirfairelinux.com/projects/libringclient/wiki"
+HOMEPAGE="https://tuleap.ring.cx/projects/ring"
 
 LICENSE="GPL-3"
 

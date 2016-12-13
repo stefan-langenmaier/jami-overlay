@@ -22,7 +22,7 @@ else
 fi
 
 DESCRIPTION="Gnome Ring client"
-HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-gnome-client/wiki"
+HOMEPAGE="https://tuleap.ring.cx/projects/ring"
 
 LICENSE="GPL-3"
 
