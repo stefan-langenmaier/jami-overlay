@@ -19,6 +19,8 @@ else
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
 	KEYWORDS="~amd64"
+
+	S=${WORKDIR}/ring-project/client-gnome
 fi
 
 DESCRIPTION="Gnome Ring client"
@@ -43,8 +45,6 @@ DEPEND="=net-libs/libringclient-${PVR}
 "
 
 RDEPEND="${DEPEND}"
-
-S=${WORKDIR}/ring-project/client-gnome
 
 src_configure() {
 	mkdir build

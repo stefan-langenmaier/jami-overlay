@@ -19,6 +19,8 @@ else
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
 	KEYWORDS="~amd64"
+
+	S=${WORKDIR}/ring-project/lrc/
 fi
 
 DESCRIPTION="libringclient is the common interface for Ring applications"
@@ -34,8 +36,6 @@ DEPEND="=net-voip/ring-daemon-${PVR}
 	>=dev-qt/qtdbus-5"
 
 RDEPEND="${DEPEND}"
-
-S=${WORKDIR}/ring-project/lrc/
 
 src_configure() {
 	mkdir build

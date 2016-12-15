@@ -21,6 +21,8 @@ else
 
 	IUSE="system-asio system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
 	KEYWORDS="~amd64"
+
+	S=${WORKDIR}/ring-project/daemon/
 fi
 
 DESCRIPTION="Ring daemon"
@@ -72,8 +74,6 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 # uuid
 
 RDEPEND="${DEPEND}"
-
-S=${WORKDIR}/ring-project/daemon/
 
 src_configure() {
 	cd contrib
