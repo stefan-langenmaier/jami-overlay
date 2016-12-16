@@ -69,7 +69,7 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 #	system-pjproject? (
 #		>=net-libs/pjproject-2.4.5[-oss,-alsa,-sdl,-ffmpeg,-v4l2,-openh264,-libyuv,portaudio,-speex,-g711,-l16,-gsm,-g722,-g7221,-ilbc,-amr,-silk,-resample,ssl]
 #                >=net-libs/gnutls-3.4.14 )
-# restbed
+# restbed the used version is a patched commit between 4.0 and 4.5, difficult to build
 # speexdsp
 # uuid
 
