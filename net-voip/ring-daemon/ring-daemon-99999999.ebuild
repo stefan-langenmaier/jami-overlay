@@ -10,7 +10,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="-system-asio -system-boost -system-cryptopp -system-flac -system-gcrypt -system-gmp -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib -system-gnutls"
+	IUSE="-system-boost -system-cryptopp -system-flac -system-gcrypt -system-gmp -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib -system-gnutls"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -19,7 +19,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="system-asio system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
+	IUSE="system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
 	KEYWORDS="~amd64"
 
 	S=${WORKDIR}/ring-project/daemon/
@@ -32,8 +32,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
-	system-boost? ( >=dev-libs/boost-1.56.0 )
+DEPEND="system-boost? ( >=dev-libs/boost-1.56.0 )
 	system-cryptopp? ( >=dev-libs/crypto++-5.6.5 )
 	system-flac? ( >=media-libs/flac-1.3.0 )
 	system-gcrypt? ( >=dev-libs/libgcrypt-1.6.5 )
@@ -72,6 +71,7 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 # restbed the used version is a patched commit between 4.0 and 4.5, difficult to build
 # speexdsp
 # uuid
+# system-asio? ( >=dev-cpp/asio-1.10.8 ) blocked by restbed dep
 
 RDEPEND="${DEPEND}"
 
@@ -82,12 +82,6 @@ src_configure() {
 	# android
 	rm -r src/natpmp
 	rm -r src/libav
-
-	if use system-asio; then
-		die "asio blocked by restbed"
-		rm -r src/asio
-		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)asio\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
-	fi
 
 	if ! use system-boost; then
 		# boost is failing with a compilation error
@@ -101,10 +95,6 @@ src_configure() {
 	if use system-cryptopp; then
 		rm -r src/cryptopp
 	fi
-
-#	if use system-ffmpeg; then
-#		rm -r src/ffmpeg
-#	fi
 
 	if use system-flac; then
 		rm -r src/flac
