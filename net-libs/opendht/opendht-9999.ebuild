@@ -8,8 +8,7 @@ inherit eutils versionator git-r3 cmake-utils
 
 DESCRIPTION="A lightweight C++11 Distributed Hash Table implementation"
 HOMEPAGE="https://github.com/savoirfairelinux/opendht/blob/master/README.md"
-EGIT_REPO_URI="git://github.com/savoirfairelinux/opendht.git \
-			 https://github.com/savoirfairelinux/opendht.git"
+EGIT_REPO_URI="git://github.com/savoirfairelinux/opendht.git"
 EGIT_BRANCH="master"
 LICENSE="GPL-3"
 
