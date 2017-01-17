@@ -9,11 +9,11 @@ inherit eutils versionator git-r3 cmake-utils
 DESCRIPTION="A lightweight C++11 Distributed Hash Table implementation"
 HOMEPAGE="https://github.com/savoirfairelinux/opendht/blob/master/README.md"
 EGIT_REPO_URI="git://github.com/savoirfairelinux/${PN}.git"
-EGIT_BRANCH="master"
+EGIT_COMMIT="${PV}"
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 DEPEND=">=dev-libs/msgpack-2.0
 	>=dev-libs/nettle-3
