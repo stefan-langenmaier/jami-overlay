@@ -10,7 +10,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="-system-boost -system-cryptopp -system-ffmpeg -system-flac -system-gcrypt -system-gmp -system-gnutls -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-libav -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-pjproject -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-uuid -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib"
+	IUSE="-system-boost -system-cryptopp -system-ffmpeg -system-flac -system-gcrypt -system-gmp -system-gnutls -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-pjproject -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-uuid -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -19,7 +19,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-libav +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
+	IUSE="system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
 	KEYWORDS="~amd64"
 
 	S=${WORKDIR}/ring-project/daemon/
@@ -44,7 +44,6 @@ DEPEND="system-boost? ( >=dev-libs/boost-1.61.0 )
 	system-iconv? ( virtual/libiconv )
 	system-jack? ( >=media-sound/jack-audio-connection-kit-0.121.3 )
 	system-jsoncpp? ( >=dev-libs/jsoncpp-1.7.2 )
-	system-libav? ( >=media-video/libav-11.1 )
 	system-msgpack? ( >=dev-libs/msgpack-2.1.0 )
 	system-nettle? ( >=dev-libs/nettle-3.1 )
 	system-ogg? ( >=media-libs/libogg-1.3.1 )
@@ -80,6 +79,7 @@ src_configure() {
 	rm -r src/natpmp
 	rm -r src/pthreads
 	rm -r src/speexdsp
+	rm -r src/libav
 
 	if ! use system-boost; then
 		# boost is failing with a compilation error
@@ -131,10 +131,6 @@ src_configure() {
 
 	if use system-jsoncpp; then
 		rm -r src/jsoncpp
-	fi
-
-	if use system-libav; then
-		rm -r src/libav
 	fi
 
 	if use system-msgpack; then

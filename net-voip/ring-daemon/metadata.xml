@@ -18,7 +18,6 @@
 	<flag name="system-iconv">Uses the system library for iconv</flag>
 	<flag name="system-jack">Uses the system library for jack</flag>
 	<flag name="system-jsoncpp">Uses the system library for jsoncpp</flag>
-	<flag name="system-libav">Uses the system library for libav</flag>
 	<flag name="system-msgpack">Uses the system library for msgpack</flag>
 	<flag name="system-nettle">Uses the system library for nettle</flag>
 	<flag name="system-ogg">Uses the system library for ogg</flag>
