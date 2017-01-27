@@ -10,7 +10,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="-system-boost -system-cryptopp -system-flac -system-gcrypt -system-gmp -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib -system-gnutls"
+	IUSE="-system-boost -system-cryptopp -system-ffmpeg -system-flac -system-gcrypt -system-gmp -system-gnutls -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-libav -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-pjproject -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-uuid -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -19,7 +19,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
+	IUSE="system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-libav +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
 	KEYWORDS="~amd64"
 
 	S=${WORKDIR}/ring-project/daemon/
@@ -32,46 +32,43 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-DEPEND="system-boost? ( >=dev-libs/boost-1.56.0 )
+DEPEND="system-boost? ( >=dev-libs/boost-1.61.0 )
 	system-cryptopp? ( >=dev-libs/crypto++-5.6.5 )
+	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi,vdpau] )
 	system-flac? ( >=media-libs/flac-1.3.0 )
 	system-gcrypt? ( >=dev-libs/libgcrypt-1.6.5 )
 	system-gmp? ( >=dev-libs/gmp-6.1.0 )
+	system-gnutls? ( >=net-libs/gnutls-3.4.14 )
 	system-gpg-error? ( >=dev-libs/libgpg-error-1.15 )
 	system-gsm? ( >=media-sound/gsm-1.0.13 )
 	system-iconv? ( virtual/libiconv )
 	system-jack? ( >=media-sound/jack-audio-connection-kit-0.121.3 )
 	system-jsoncpp? ( >=dev-libs/jsoncpp-1.7.2 )
-	system-msgpack? ( >=dev-libs/msgpack-2.0.0 )
+	system-libav? ( >=media-video/libav-11.1 )
+	system-msgpack? ( >=dev-libs/msgpack-2.1.0 )
 	system-nettle? ( >=dev-libs/nettle-3.1 )
 	system-ogg? ( >=media-libs/libogg-1.3.1 )
 	system-opendht? ( >=net-libs/opendht-1.3.0 )
 	system-opus? ( >=media-libs/opus-1.1.2 )
+	system-pcre? ( >=dev-libs/libpcre-8.40 )
+	system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 	system-portaudio? ( >=media-libs/portaudio-19_pre20140130 )
 	system-samplerate? ( >=media-libs/libsamplerate-0.1.8 )
 	system-sndfile? ( >=media-libs/libsndfile-1.0.25 )
 	system-speex? ( >=media-libs/speex-1.0.5 )
 	system-upnp? ( >=net-libs/libupnp-1.6.19:= )
+	system-uuid? ( >=sys-libs/libuuid-1.0.3 )
 	system-vorbis? ( >=media-libs/libvorbis-1.3.4 )
 	system-vpx? ( >=media-libs/libvpx-1.6.0 )
 	system-x264? ( >=media-libs/x264-0.0.20140308 )
-	system-yaml-cpp? ( >=dev-cpp/yaml-cpp-0.5.1 )
+	system-yaml-cpp? ( >=dev-cpp/yaml-cpp-0.5.3 )
 	system-zlib? ( >=sys-libs/zlib-1.2.8 )
-	system-gnutls? ( >=net-libs/gnutls-3.4.14 )
 	dev-libs/dbus-c++
 	|| ( media-sound/pulseaudio media-sound/apulse )
-	x11-libs/libva"
+	"
 
-# boost should be at 1.61
-#	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi,vdpau] )
-
-#	system-pjproject? (
-#		>=net-libs/pjproject-2.4.5[-oss,-alsa,-sdl,-ffmpeg,-v4l2,-openh264,-libyuv,portaudio,-speex,-g711,-l16,-gsm,-g722,-g7221,-ilbc,-amr,-silk,-resample,ssl]
-#                >=net-libs/gnutls-3.4.14 )
 # restbed the used version is a patched commit between 4.0 and 4.5, difficult to build
-# speexdsp
-# uuid
-# system-asio? ( >=dev-cpp/asio-1.10.8 ) blocked by restbed dep
+# system-asio? ( >=dev-cpp/asio-1.10.8 ) 28d9b8d6df708024af5227c551673fdb2519f5bf blocked by restbed dep
 
 RDEPEND="${DEPEND}"
 
@@ -81,7 +78,8 @@ src_configure() {
 	# remove folders for other OSes
 	# android
 	rm -r src/natpmp
-	rm -r src/libav
+	rm -r src/pthreads
+	rm -r src/speexdsp
 
 	if ! use system-boost; then
 		# boost is failing with a compilation error
@@ -94,6 +92,10 @@ src_configure() {
 
 	if use system-cryptopp; then
 		rm -r src/cryptopp
+	fi
+
+	if use system-ffmpeg; then
+		rm -r src/ffmpeg
 	fi
 
 	if use system-flac; then
@@ -129,6 +131,10 @@ src_configure() {
 
 	if use system-jsoncpp; then
 		rm -r src/jsoncpp
+	fi
+
+	if use system-libav; then
+		rm -r src/libav
 	fi
 
 	if use system-msgpack; then
@@ -180,6 +186,10 @@ src_configure() {
 		rm -r src/upnp
 	fi
 
+	if use system-uuid; then
+		rm -r src/uuid
+	fi
+
 	if use system-vorbis; then
 		rm -r src/vorbis
 	fi
@@ -227,8 +237,12 @@ src_configure() {
 
 src_install() {
 	default
-	rm "${D}usr/lib/libring.la"
+	prune_libtool_files --all
 }
 
-# TODO add a log warning if
-# system-ffmpeg overwriting a patched dep I hope you know what you are doing
+pkg_postinst() {
+	if use system-pjproject ; then
+		ewarn "You are using a system version of a patched library"
+		ewarn "I hope you know what you are doing"
+	fi
+}
