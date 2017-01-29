@@ -14,7 +14,7 @@ if [[ ${PV} == *99999999* ]]; then
 else
 	inherit eutils cmake-utils gnome2-utils
 
-	COMMIT_HASH="49686a5"
+	COMMIT_HASH="7c580b1"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 

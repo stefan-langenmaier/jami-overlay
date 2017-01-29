@@ -1,6 +1,6 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=6
 
@@ -10,28 +10,29 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="-system-asio -system-boost -system-cryptopp -system-flac -system-gcrypt -system-gmp -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib -system-gnutls"
+	IUSE="-system-boost -system-cryptopp -system-flac -system-gcrypt -system-gmp -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib -system-gnutls"
 	KEYWORDS=""
 else
 	inherit eutils versionator
 
-	COMMIT_HASH="3120ba5"
+	COMMIT_HASH="0169026"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="system-asio system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
+	IUSE="system-boost +system-cryptopp +system-flac +system-gcrypt +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib system-gnutls"
 	KEYWORDS="~amd64"
+
+	S=${WORKDIR}/ring-project/daemon/
 fi
 
 DESCRIPTION="Ring daemon"
-HOMEPAGE="https://projects.savoirfairelinux.com/projects/ring-daemon/wiki"
+HOMEPAGE="https://tuleap.ring.cx/projects/ring"
 
 LICENSE="GPL-3"
 
 SLOT="0"
 
-DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
-	system-boost? ( >=dev-libs/boost-1.56.0 )
+DEPEND="system-boost? ( >=dev-libs/boost-1.56.0 )
 	system-cryptopp? ( >=dev-libs/crypto++-5.6.5 )
 	system-flac? ( >=media-libs/flac-1.3.0 )
 	system-gcrypt? ( >=dev-libs/libgcrypt-1.6.5 )
@@ -44,13 +45,13 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 	system-msgpack? ( >=dev-libs/msgpack-2.0.0 )
 	system-nettle? ( >=dev-libs/nettle-3.1 )
 	system-ogg? ( >=media-libs/libogg-1.3.1 )
-	system-opendht? ( >=net-libs/opendht-0.6.3 )
+	system-opendht? ( >=net-libs/opendht-1.3.0 )
 	system-opus? ( >=media-libs/opus-1.1.2 )
 	system-portaudio? ( >=media-libs/portaudio-19_pre20140130 )
 	system-samplerate? ( >=media-libs/libsamplerate-0.1.8 )
 	system-sndfile? ( >=media-libs/libsndfile-1.0.25 )
 	system-speex? ( >=media-libs/speex-1.0.5 )
-	system-upnp? ( >=net-libs/libupnp-1.6.19 )
+	system-upnp? ( >=net-libs/libupnp-1.6.19:= )
 	system-vorbis? ( >=media-libs/libvorbis-1.3.4 )
 	system-vpx? ( >=media-libs/libvpx-1.6.0 )
 	system-x264? ( >=media-libs/x264-0.0.20140308 )
@@ -67,13 +68,12 @@ DEPEND="system-asio? ( >=dev-cpp/asio-1.10.8 )
 #	system-pjproject? (
 #		>=net-libs/pjproject-2.4.5[-oss,-alsa,-sdl,-ffmpeg,-v4l2,-openh264,-libyuv,portaudio,-speex,-g711,-l16,-gsm,-g722,-g7221,-ilbc,-amr,-silk,-resample,ssl]
 #                >=net-libs/gnutls-3.4.14 )
-# restbed
+# restbed the used version is a patched commit between 4.0 and 4.5, difficult to build
 # speexdsp
 # uuid
+# system-asio? ( >=dev-cpp/asio-1.10.8 ) blocked by restbed dep
 
 RDEPEND="${DEPEND}"
-
-S=${WORKDIR}/ring-project/daemon/
 
 src_configure() {
 	cd contrib
@@ -82,12 +82,6 @@ src_configure() {
 	# android
 	rm -r src/natpmp
 	rm -r src/libav
-
-	if use system-asio; then
-		die "asio blocked by restbed"
-		rm -r src/asio
-		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)asio\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
-	fi
 
 	if ! use system-boost; then
 		# boost is failing with a compilation error
@@ -101,10 +95,6 @@ src_configure() {
 	if use system-cryptopp; then
 		rm -r src/cryptopp
 	fi
-
-#	if use system-ffmpeg; then
-#		rm -r src/ffmpeg
-#	fi
 
 	if use system-flac; then
 		rm -r src/flac

@@ -6,7 +6,6 @@
 <pkgmetadata>
 <longdescription>Ring daemon</longdescription>
 <use>
-	<flag name="system-asio">Uses the system library for asio</flag>
 	<flag name="system-boost">Uses the system library for boost</flag>
 	<flag name="system-cryptopp">Uses the system library for cryptopp</flag>
 	<flag name="system-flac">Uses the system library for flac</flag>

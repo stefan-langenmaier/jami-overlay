@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -14,11 +14,13 @@ if [[ ${PV} == *99999999* ]]; then
 else
 	inherit eutils cmake-utils gnome2-utils
 
-	COMMIT_HASH="2e7a668"
+	COMMIT_HASH="0169026"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
 	KEYWORDS="~amd64"
+
+	S=${WORKDIR}/ring-project/client-gnome
 fi
 
 DESCRIPTION="Gnome Ring client"
@@ -43,8 +45,6 @@ DEPEND="=net-libs/libringclient-${PVR}
 "
 
 RDEPEND="${DEPEND}"
-
-S=${WORKDIR}/ring-project/client-gnome
 
 src_configure() {
 	mkdir build
