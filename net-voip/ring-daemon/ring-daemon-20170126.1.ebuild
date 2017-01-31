@@ -10,7 +10,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="-system-boost -system-cryptopp -system-ffmpeg -system-flac -system-gcrypt -system-gmp -system-gnutls -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-pjproject -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-uuid -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib"
+	IUSE="vaapi vdpau -system-boost -system-cryptopp -system-ffmpeg -system-flac -system-gcrypt -system-gmp -system-gnutls -system-gpg-error -system-gsm -system-iconv -system-jack -system-jsoncpp -system-msgpack -system-nettle -system-ogg -system-opendht -system-opus -system-pcre -system-pjproject -system-portaudio -system-samplerate -system-sndfile -system-speex -system-upnp -system-uuid -system-vorbis -system-vpx -system-x264 -system-yaml-cpp -system-zlib"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -19,7 +19,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="+system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
+	IUSE="vaapi vdpau +system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
 	KEYWORDS="~amd64"
 
 	S=${WORKDIR}/ring-project/daemon/
@@ -34,7 +34,7 @@ SLOT="0"
 
 DEPEND="system-boost? ( >=dev-libs/boost-1.61.0 )
 	system-cryptopp? ( >=dev-libs/crypto++-5.6.5 )
-	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi,vdpau] )
+	system-ffmpeg? ( >=media-video/ffmpeg-3.1.3[v4l,vaapi?,vdpau?] )
 	system-flac? ( >=media-libs/flac-1.3.0 )
 	system-gcrypt? ( >=dev-libs/libgcrypt-1.6.5 )
 	system-gmp? ( >=dev-libs/gmp-6.1.0 )
