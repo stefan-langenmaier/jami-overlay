@@ -19,7 +19,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
+	IUSE="+system-boost +system-cryptopp system-ffmpeg +system-flac +system-gcrypt system-gnutls +system-gmp +system-gpg-error +system-gsm system-iconv +system-jack +system-jsoncpp +system-msgpack +system-nettle +system-ogg +system-opendht +system-opus +system-pcre -system-pjproject +system-portaudio +system-samplerate +system-sndfile +system-speex +system-upnp +system-uuid +system-vorbis +system-vpx +system-x264 +system-yaml-cpp +system-zlib"
 	KEYWORDS="~amd64"
 
 	S=${WORKDIR}/ring-project/daemon/
@@ -184,6 +184,12 @@ src_configure() {
 
 	if use system-uuid; then
 		rm -r src/uuid
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_uuid)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)uuid\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) \+= \(.*\)$(DEPS_uuid)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) \+= \(.*\)uuid\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) += \(.*\)$(DEPS_uuid)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) += \(.*\)uuid\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
 	fi
 
 	if use system-vorbis; then
