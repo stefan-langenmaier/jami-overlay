@@ -63,6 +63,7 @@ DEPEND="system-boost? ( >=dev-libs/boost-1.61.0 )
 	system-yaml-cpp? ( >=dev-cpp/yaml-cpp-0.5.3 )
 	system-zlib? ( >=sys-libs/zlib-1.2.8 )
 	dev-libs/dbus-c++
+	x11-libs/libva
 	|| ( media-sound/pulseaudio media-sound/apulse )
 	"
 
