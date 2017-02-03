@@ -6,6 +6,7 @@
 <pkgmetadata>
 <longdescription>Ring daemon</longdescription>
 <use>
+	<flag name="system-asio">Uses the system library for asio</flag>
 	<flag name="system-boost">Uses the system library for boost</flag>
 	<flag name="system-cryptopp">Uses the system library for cryptopp</flag>
 	<flag name="system-ffmpeg">Uses the system library for ffmpeg</flag>
@@ -26,6 +27,7 @@
 	<flag name="system-pcre">Uses the system library for pcre</flag>
 	<flag name="system-pjproject">Uses the system library for pjproject</flag>
 	<flag name="system-portaudio">Uses the system library for portaudio</flag>
+	<flag name="system-restbed">Uses the system library for restbed</flag>
 	<flag name="system-samplerate">Uses the system library for samplerate</flag>
 	<flag name="system-sndfile">Uses the system library for sndfile</flag>
 	<flag name="system-speex">Uses the system library for speex</flag>
