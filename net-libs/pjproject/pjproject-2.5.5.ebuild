@@ -8,7 +8,8 @@ inherit flag-o-matic
 
 DESCRIPTION="Open source SIP, Media, and NAT Traversal Library"
 HOMEPAGE="http://www.pjsip.org/"
-SRC_URI="http://www.pjsip.org/release/${PV}/${P}.tar.bz2"
+SRC_URI="http://www.pjsip.org/release/${PV}/${P}.tar.bz2
+	https://github.com/stefan-langenmaier/ring-overlay/raw/files/${PN}-patches-${PV}.tar.xz"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
@@ -46,15 +47,15 @@ REQUIRED_USE="?? ( ${SOUND_FLAGS} )
 	gnutls? ( ssl )"
 
 PATCHES=(
-	"${FILESDIR}/endianness.patch"
-	"${FILESDIR}/gnutls.patch"
-	"${FILESDIR}/ipv6.patch"
-	"${FILESDIR}/ice_config.patch"
-	"${FILESDIR}/multiple_listeners.patch"
-	"${FILESDIR}/pj_ice_sess.patch"
-	"${FILESDIR}/fix_turn_fallback.patch"
-	"${FILESDIR}/fix_ioqueue_ipv6_sendto.patch"
-	"${FILESDIR}/add_dtls_transport.patch"
+	"${WORKDIR}/endianness.patch"
+	"${WORKDIR}/gnutls.patch"
+	"${WORKDIR}/ipv6.patch"
+	"${WORKDIR}/ice_config.patch"
+	"${WORKDIR}/multiple_listeners.patch"
+	"${WORKDIR}/pj_ice_sess.patch"
+	"${WORKDIR}/fix_turn_fallback.patch"
+	"${WORKDIR}/fix_ioqueue_ipv6_sendto.patch"
+	"${WORKDIR}/add_dtls_transport.patch"
 )
 
 src_configure() {
