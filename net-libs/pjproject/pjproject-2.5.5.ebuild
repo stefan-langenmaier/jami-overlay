@@ -12,7 +12,7 @@ SRC_URI="http://www.pjsip.org/release/${PV}/${P}.tar.bz2"
 KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="2/9999"
 CODEC_FLAGS="g711 g722 g7221 gsm ilbc speex l16"
 VIDEO_FLAGS="sdl ffmpeg v4l2 openh264 libyuv"
 SOUND_FLAGS="alsa oss portaudio"
