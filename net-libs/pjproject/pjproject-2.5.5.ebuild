@@ -45,9 +45,14 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="?? ( ${SOUND_FLAGS} )
 	gnutls? ( ssl )"
 
+pre_src_prepare() {
+	tar jxf "${FILESDIR}/gnutls_2.patch.tar.bz2" -C "${WORKDIR}/"
+}
+
 PATCHES=(
 	"${FILESDIR}/endianness.patch"
-	"${FILESDIR}/gnutls.patch"
+	"${FILESDIR}/gnutls_1.patch"
+	"${WORKDIR}/gnutls_2.patch"
 	"${FILESDIR}/ipv6.patch"
 	"${FILESDIR}/ice_config.patch"
 	"${FILESDIR}/multiple_listeners.patch"
