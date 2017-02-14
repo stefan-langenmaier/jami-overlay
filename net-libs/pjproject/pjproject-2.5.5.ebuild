@@ -16,7 +16,7 @@ SLOT="0"
 CODEC_FLAGS="g711 g722 g7221 gsm ilbc speex l16"
 VIDEO_FLAGS="sdl ffmpeg v4l2 openh264 libyuv"
 SOUND_FLAGS="alsa oss portaudio"
-IUSE="amr debug doc epoll examples ipv6 opus resample silk ssl static-libs webrtc ${CODEC_FLAGS} ${VIDEO_FLAGS} ${SOUND_FLAGS}"
+IUSE="amr debug doc epoll examples +gnutls ipv6 opus resample silk +ssl static-libs webrtc ${CODEC_FLAGS} ${VIDEO_FLAGS} ${SOUND_FLAGS}"
 
 RDEPEND="alsa? ( media-libs/alsa-lib )
 	oss? ( media-libs/portaudio[oss] )
@@ -33,21 +33,37 @@ RDEPEND="alsa? ( media-libs/alsa-lib )
 	openh264? ( media-libs/openh264 )
 	resample? ( media-libs/libsamplerate )
 
-	ssl? ( dev-libs/openssl:= )
+	ssl? (
+		gnutls? ( >=net-libs/gnutls-3.4.14:= )
+		!gnutls? ( dev-libs/openssl:= )
+			)
 
 	net-libs/libsrtp:="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-REQUIRED_USE="?? ( ${SOUND_FLAGS} )"
+REQUIRED_USE="?? ( ${SOUND_FLAGS} )
+	gnutls? ( ssl )"
+
+PATCHES=(
+	"${FILESDIR}/endianness.patch"
+	"${FILESDIR}/gnutls.patch"
+	"${FILESDIR}/ipv6.patch"
+	"${FILESDIR}/ice_config.patch"
+	"${FILESDIR}/multiple_listeners.patch"
+	"${FILESDIR}/pj_ice_sess.patch"
+	"${FILESDIR}/fix_turn_fallback.patch"
+	"${FILESDIR}/fix_ioqueue_ipv6_sendto.patch"
+	"${FILESDIR}/add_dtls_transport.patch"
+)
 
 src_configure() {
 	local myconf=()
 	local videnable="--disable-video"
 	local t
 
-	use ipv6 && append-flags -DPJ_HAS_IPV6=1
-	use debug || append-flags -DNDEBUG=1
+	use ipv6 && append-cppflags -DPJ_HAS_IPV6=1
+	use debug || append-cppflags -DNDEBUG=1
 
 	for t in ${CODEC_FLAGS}; do
 		myconf+=( $(use_enable ${t} ${t}-codec) )
@@ -57,6 +73,14 @@ src_configure() {
 		myconf+=( $(use_enable ${t}) )
 		use "${t}" && videnable="--enable-video"
 	done
+
+	if use ssl && use gnutls ; then
+		myconf+=( --enable-ssl=gnutls)
+	elif use ssl && ! use gnutls ; then
+		myconf+=( --enable-ssl=openssl)
+	else
+		myconf+=( --disable-ssl)
+	fi
 
 	econf \
 		--enable-shared \
@@ -76,7 +100,6 @@ src_configure() {
 		$(use_enable amr opencore-amr) \
 		$(use_enable silk) \
 		$(use_enable opus) \
-		$(use_enable ssl) \
 		$(use_enable webrtc) \
 		"${myconf[@]}"
 }
@@ -99,4 +122,13 @@ src_install() {
 	fi
 
 	use static-libs || rm "${D}/usr/$(get_libdir)/*.a"
+}
+
+pkg_postinst() {
+	if use gnutls ; then
+		ewarn "You are using a patched library with gnutls patch"
+		ewarn "There is no guarantee that it will work with any software besides net-voip/ring-daemon"
+	elif use ssl && ! use gnutls ; then
+		ewarn "The gnutls is necessary for net-voip/ring-daemon"
+	fi
 }
