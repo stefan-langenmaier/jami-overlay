@@ -249,10 +249,3 @@ src_install() {
 	default
 	prune_libtool_files --all
 }
-
-pkg_postinst() {
-	if use system-pjproject ; then
-		ewarn "You are using a system version of a patched library"
-		ewarn "I hope you know what you are doing"
-	fi
-}
