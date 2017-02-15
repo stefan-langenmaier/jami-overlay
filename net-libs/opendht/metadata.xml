@@ -5,4 +5,12 @@
 -->
 <pkgmetadata>
 <longdescription>A lightweight C++11 Distributed Hash Table implementation</longdescription>
+ <use>
+    <flag name="python">
+      Install Python bindings. Requires <pkg>dev-python/cython</pkg>.
+    </flag>
+    <flag name="tools">
+      Install extra opendht tools (dhtchat, dhtnode and dhtscanner).
+    </flag>
+ </use>
 </pkgmetadata>

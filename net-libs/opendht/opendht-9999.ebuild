@@ -4,7 +4,9 @@
 
 EAPI=6
 
-inherit eutils versionator git-r3 cmake-utils
+PYTHON_COMPAT=( python3_{4,5,6} )
+
+inherit eutils versionator git-r3 cmake-utils python-r1
 
 DESCRIPTION="A lightweight C++11 Distributed Hash Table implementation"
 HOMEPAGE="https://github.com/savoirfairelinux/opendht/blob/master/README.md"
@@ -15,10 +17,23 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 
+IUSE="python static-libs tools"
+
 DEPEND=">=dev-libs/msgpack-2.0
 	>=dev-libs/nettle-3
-	net-libs/gnutls"
+	net-libs/gnutls
+	python? ( dev-python/cython[$(python_gen_usedep python3_{4,5,6})] )
+	tools? ( sys-libs/readline:0 )"
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	local mycmakeargs=(
+		-DOPENDHT_PYTHON=$(usex python)
+		-DOPENDHT_STATIC=$(usex static-libs)
+		-DOPENDHT_TOOLS=$(usex tools)
+	)
+	cmake-utils_src_configure
+}
 
 src_install() {
 	cmake-utils_src_install
