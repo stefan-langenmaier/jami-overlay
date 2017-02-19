@@ -30,25 +30,29 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE=""
+IUSE="doc dbus video"
 
-DEPEND="=net-voip/ring-daemon-${PVR}
+DEPEND="dbus? ( =net-voip/ring-daemon-${PVR}[dbus,video] )
+	!dbus? ( =net-voip/ring-daemon-${PVR}[video] )
 	>=dev-qt/qtdbus-5"
 
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	mkdir build
-	cd build
-	cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+		local mycmakeargs=(
+		-DENABLE_VIDEO="$(usex video true false)"
+		-DENABLE_LIBWRAP="$(usex !dbus true false)"
+		-DCMAKE_INSTALL_PREFIX=/usr
+		-DCMAKE_BUILD_TYPE=Release
+	)
+	cmake-utils_src_configure
 }
 
 src_compile() {
-	cd build
-	emake
+cmake-utils_src_compile
 }
 
 src_install() {
-	cd build
-	default
+	use !doc && rm README.md
+cmake-utils_src_install
 }
