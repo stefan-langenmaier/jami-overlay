@@ -83,6 +83,7 @@ REQUIRED_USE="dbus? ( sdes )
 
 src_configure() {
 	rm -rf ../client-*
+
 	cd contrib
 
 	# remove folders for other OSes
@@ -125,13 +126,18 @@ src_configure() {
 		rm -r src/pjproject
 	fi
 
+	#if system library is installed, then bundled will be ignored even with !system-
+	if ! use system-gnutls || ! use system-pjproject ; then
 	mkdir build
 	cd build
 	../bootstrap || die "Bootstrap of bundled libraries failed"
 
 	make || die "Bundled libraries could not be compiled"
-
 	cd ../..
+	else
+	cd ..
+	fi
+
 	# patch jsoncpp include
 	grep -rli '#include <json/json.h>' . | xargs -i@ sed -i 's/#include <json\/json.h>/#include <jsoncpp\/json\/json.h>/g' @
 	./autogen.sh || die "Autogen failed"
