@@ -10,7 +10,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex upnp +vaapi vdpau +video +vorbis +vpx +x264"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex  upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -19,7 +19,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex upnp +vaapi vdpau +video +vorbis +vpx +x264"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
 	KEYWORDS="~amd64"
 
 	S="${WORKDIR}/ring-project/daemon"
@@ -32,7 +32,10 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-RDEPEND=">=dev-cpp/yaml-cpp-0.5.3
+RDEPEND="system-gnutls? ( >=net-libs/gnutls-3.4.14 )
+	system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
+
+	>=dev-cpp/yaml-cpp-0.5.3
 
 	>=dev-libs/boost-1.61.0
 	>=dev-libs/crypto++-5.6.5
@@ -46,10 +49,7 @@ RDEPEND=">=dev-cpp/yaml-cpp-0.5.3
 
 	libilbc? ( media-libs/libilbc )
 
-	>=net-libs/gnutls-3.4.14
 	>=net-libs/opendht-1.3.0
-	>=net-libs/pjproject-2.5.5:2/9999
-
 	>=sys-libs/zlib-1.2.8
 		x11-libs/libva
 
@@ -83,6 +83,55 @@ REQUIRED_USE="dbus? ( sdes )
 
 src_configure() {
 	rm -rf ../client-*
+	cd contrib
+
+	# remove folders for other OSes
+	# android
+	rm -r src/{asio,boost,cryptopp,ffmpeg,flac,gcrypt,gmp,gpg-error,gsm,iconv,jack,jsoncpp,libav,msgpack,natpmp,nettle,ogg,opendht,opus,pcre,portaudio,pthreads,restbed,samplerate,sndfile,speex,speexdsp,upnp,uuid,vorbis,vpx,x264,yaml-cpp,zlib}
+
+	#gmp
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)gmp $(DEPS_gmp)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#iconv
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)iconv $(DEPS_iconv)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)iconv\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#nettle
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)nettle $(DEPS_nettle)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#opus
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_opus)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)opus\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#speex; then
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_speex)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)speex\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#uuid
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_uuid)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)uuid\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) += \(.*\)$(DEPS_uuid)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) += \(.*\)uuid\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#vpx
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)$(DEPS_vpx)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)vpx\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#x264
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)x264 $(DEPS_x264)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)x264\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+	#zlib
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)zlib $(DEPS_zlib)\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)zlib\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
+
+	if use system-gnutls; then
+		rm -r src/gnutls
+	fi
+
+	if use system-pjproject; then
+		rm -r src/pjproject
+	fi
+
+	mkdir build
+	cd build
+	../bootstrap || die "Bootstrap of bundled libraries failed"
+
+	make || die "Bundled libraries could not be compiled"
+
+	cd ../..
 	# patch jsoncpp include
 	grep -rli '#include <json/json.h>' . | xargs -i@ sed -i 's/#include <json\/json.h>/#include <jsoncpp\/json\/json.h>/g' @
 	./autogen.sh || die "Autogen failed"
