@@ -87,6 +87,7 @@ src_configure() {
 	grep -rli '#include <json/json.h>' . | xargs -i@ sed -i 's/#include <json\/json.h>/#include <jsoncpp\/json\/json.h>/g' @
 	./autogen.sh || die "Autogen failed"
 
+#opensl is android stuff (OpenSLES)
 	econf \
 			--without-opensl \
 			$(use_with alsa alsa ) \
