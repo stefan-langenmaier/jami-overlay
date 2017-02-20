@@ -27,7 +27,6 @@ SLOT="0"
 IUSE="python static-libs tools"
 
 DEPEND=">=dev-libs/msgpack-2.0
-	>=dev-libs/nettle-3
 	net-libs/gnutls
 	python? ( dev-python/cython[$(python_gen_usedep python3_{4,5,6})] )
 	tools? ( sys-libs/readline:0 )"
