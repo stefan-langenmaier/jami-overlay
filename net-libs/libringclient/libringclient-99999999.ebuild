@@ -30,7 +30,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="doc dbus video"
+IUSE="doc +dbus +video"
 
 DEPEND="dbus? ( =net-voip/ring-daemon-${PVR}[dbus,video] )
 	!dbus? ( =net-voip/ring-daemon-${PVR}[video] )
