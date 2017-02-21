@@ -24,13 +24,18 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="python static-libs tools"
+IUSE="doc python static-libs tools"
 
-DEPEND=">=dev-libs/msgpack-2.0
+DEPEND=">=app-crypt/argon2-20161029
+	>=dev-libs/msgpack-2.0
 	net-libs/gnutls
 	python? ( dev-python/cython[$(python_gen_usedep python3_{4,5,6})] )
 	tools? ( sys-libs/readline:0 )"
 RDEPEND="${DEPEND}"
+
+PATCHES=(
+	"${FILESDIR}/argon2_system.patch"
+)
 
 src_configure() {
 	local mycmakeargs=(
@@ -42,7 +47,6 @@ src_configure() {
 }
 
 src_install() {
+	use !doc && rm README.md
 	cmake-utils_src_install
-
-	dodoc README.md
 }
