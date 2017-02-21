@@ -28,7 +28,7 @@ IUSE="doc python static-libs tools"
 
 DEPEND=">=app-crypt/argon2-20161029
 	>=dev-libs/msgpack-2.0
-	>=net-libs/gnutls-3.4.1
+	net-libs/gnutls
 	python? ( dev-python/cython[$(python_gen_usedep python3_{4,5,6})] )
 	tools? ( sys-libs/readline:0 )"
 RDEPEND="${DEPEND}"
