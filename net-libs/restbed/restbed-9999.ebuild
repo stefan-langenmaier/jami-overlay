@@ -28,7 +28,7 @@ IUSE="examples doc ssl static-libs test"
 
 CMAKE_MIN_VERSION="2.8.10"
 
-RDEPEND="dev-cpp/asio
+RDEPEND=">=dev-cpp/asio-1.11.0
 	dev-cpp/kashmir
 	sys-libs/zlib
 	examples? (
