@@ -24,11 +24,11 @@ fi
 
 LICENSE="AGPL-3"
 SLOT="0"
-IUSE="examples ssl static-libs test"
+IUSE="examples doc ssl static-libs test"
 
 CMAKE_MIN_VERSION="2.8.10"
 
-RDEPEND=">=dev-cpp/asio-1.11.0
+RDEPEND="dev-cpp/asio
 	dev-cpp/kashmir
 	sys-libs/zlib
 	examples? (
@@ -40,14 +40,20 @@ RDEPEND=">=dev-cpp/asio-1.11.0
 DEPEND="${RDEPEND}
 	test? ( dev-cpp/catch )"
 
-DOCS=( README.md
-	documentation/API.md
-	documentation/DESIGN.md
-	documentation/STANDARDS.md
-	documentation/UML.md
+PATCHES=(
+	"${FILESDIR}/Change-detecting-libs-to-system.patch"
 )
 
 src_prepare() {
+	if use doc ; then DOCS=( README.md
+		documentation/API.md
+		documentation/DESIGN.md
+		documentation/STANDARDS.md
+		documentation/UML.md
+	)
+		else rm README.md
+	fi
+
 	if use examples; then
 		sed -r -i \
 			-e 's/(set\( EXAMPLE_INSTALL_DIR ).*\)/\1\$\{CMAKE_INSTALL_PREFIX\}\/share\/corvusoft\/restbed \)/' \
