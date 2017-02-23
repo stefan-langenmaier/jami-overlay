@@ -11,6 +11,7 @@ HOMEPAGE="https://github.com/Corvusoft/${PN}"
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Corvusoft/${PN}.git"
+	EGIT_SUBMODULES=()
 	KEYWORDS=""
 else
 	MY_PV=$(replace_version_separator 2 '-')
@@ -39,10 +40,6 @@ RDEPEND=">=dev-cpp/asio-9999
 
 DEPEND="${RDEPEND}
 	test? ( dev-cpp/catch )"
-
-PATCHES=(
-	"${FILESDIR}/Change-detecting-libs-to-system.patch"
-)
 
 src_prepare() {
 	if use doc ; then DOCS=( README.md
