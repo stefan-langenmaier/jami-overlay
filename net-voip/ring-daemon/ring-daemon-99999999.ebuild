@@ -9,7 +9,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -18,7 +18,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
 	KEYWORDS="~amd64"
 
 	S="${WORKDIR}/ring-project/daemon"
@@ -47,6 +47,8 @@ RDEPEND="system-gnutls? ( >=net-libs/gnutls-3.4.14 )
 	libav? ( >=media-video/libav-12:0=[encode,gsm?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
 
 	libilbc? ( media-libs/libilbc )
+	speex? ( >=media-libs/speex-1.2.0 )
+	speexdsp? ( >=media-libs/speexdsp-1.2_rc3 )
 
 	>=net-libs/opendht-1.3.0
 	>=sys-libs/zlib-1.2.8
@@ -137,7 +139,7 @@ src_configure() {
 		$(use_with restbed restcpp) \
 		$(use_with sdes sdes) \
 		$(use_with speex speex) \
-		$(use_with speex speexdsp) \
+		$(use_with speexdsp speexdsp) \
 		$(use_with upnp upnp) \
 		$(use_enable doc doxygen) \
 		$(use_enable graph dot) \
