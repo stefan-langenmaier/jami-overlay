@@ -3,38 +3,8 @@
 <pkgmetadata>
 <longdescription>Ring daemon</longdescription>
 <use>
-	<flag name="system-asio">Uses the system library for asio</flag>
-	<flag name="system-boost">Uses the system library for boost</flag>
-	<flag name="system-cryptopp">Uses the system library for cryptopp</flag>
-	<flag name="system-ffmpeg">Uses the system library for ffmpeg</flag>
-	<flag name="system-flac">Uses the system library for flac</flag>
-	<flag name="system-gcrypt">Uses the system library for gcrypt</flag>
-	<flag name="system-gmp">Uses the system library for gmp</flag>
 	<flag name="system-gnutls">Uses the system library for gnutls</flag>
-	<flag name="system-gpg-error">Uses the system library for gpg-error</flag>
-	<flag name="system-gsm">Uses the system library for gsm</flag>
-	<flag name="system-iconv">Uses the system library for iconv</flag>
-	<flag name="system-jack">Uses the system library for jack</flag>
-	<flag name="system-jsoncpp">Uses the system library for jsoncpp</flag>
-	<flag name="system-msgpack">Uses the system library for msgpack</flag>
-	<flag name="system-nettle">Uses the system library for nettle</flag>
-	<flag name="system-ogg">Uses the system library for ogg</flag>
-	<flag name="system-opendht">Uses the system library for opendht</flag>
-	<flag name="system-opus">Uses the system library for opus</flag>
-	<flag name="system-pcre">Uses the system library for pcre</flag>
 	<flag name="system-pjproject">Uses the system library for pjproject</flag>
-	<flag name="system-portaudio">Uses the system library for portaudio</flag>
-	<flag name="system-restbed">Uses the system library for restbed</flag>
-	<flag name="system-samplerate">Uses the system library for samplerate</flag>
-	<flag name="system-sndfile">Uses the system library for sndfile</flag>
-	<flag name="system-speex">Uses the system library for speex</flag>
-	<flag name="system-upnp">Uses the system library for upnp</flag>
-	<flag name="system-uuid">Uses the system library for uuid</flag>
-	<flag name="system-vorbis">Uses the system library for vorbis</flag>
-	<flag name="system-vpx">Uses the system library for vpx</flag>
-	<flag name="system-x264">Uses the system library for x264</flag>
-	<flag name="system-yaml-cpp">Uses the system library for yaml-cpp</flag>
-	<flag name="system-zlib">Uses the system library for zlib</flag>
 	<flag name="dbus">The D-Bus xml interfaces, and c++ bindings.</flag>
 	<flag name="hwaccel">Enable hardware-accelerated rendering (only vaapi supports at this moment)</flag>
 	<flag name="graph">Create dot graphs in documentations</flag>
