@@ -42,6 +42,7 @@
 	<flag name="nat-pmp">Support for NAT-PMP</flag>
 	<flag name="opus">Support opus audio</flag>
 	<flag name="sdes">Support for sdes key exchange. It uses <pkg>dev-libs/libpcre</pkg></flag>
+	<flag name="speexdsp">Support for speexdp Noise Suppression and Automatic Gain Control</flag>
 	<flag name="restbed">An alternative to the dbus client to communicate with
 		a headless daemon. It uses <pkg>net-libs/restbed</pkg>, a cpp framework for RESTful services.</flag>
 	<flag name="ringns">Ring name service, depends on <pkg>net-libs/restbed</pkg></flag>
