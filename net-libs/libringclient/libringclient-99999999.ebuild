@@ -29,7 +29,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="doc +dbus +video"
+IUSE="doc +dbus +video static-libs"
 
 DEPEND="dbus? ( =net-voip/ring-daemon-${PVR}[dbus,video] )
 	!dbus? ( =net-voip/ring-daemon-${PVR}[video] )
@@ -40,6 +40,7 @@ RDEPEND="${DEPEND}"
 src_configure() {
 		local mycmakeargs=(
 		-DENABLE_VIDEO="$(usex video true false)"
+		-DENABLE_STATIC="$(usex static-libs true false)"
 		-DENABLE_LIBWRAP="$(usex !dbus true false)"
 		-DCMAKE_INSTALL_PREFIX=/usr
 		-DCMAKE_BUILD_TYPE=Release
@@ -48,10 +49,10 @@ src_configure() {
 }
 
 src_compile() {
-cmake-utils_src_compile
+	cmake-utils_src_compile
 }
 
 src_install() {
 	use !doc && rm README.md
-cmake-utils_src_install
+	cmake-utils_src_install
 }
