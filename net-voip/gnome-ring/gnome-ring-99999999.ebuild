@@ -29,26 +29,38 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE=""
+IUSE="-appindicator +libnotify networkmanager +qrcode static-libs"
 
-DEPEND="=net-libs/libringclient-${PVR}
+DEPEND=">=app-text/libebook-0.1.2
+	appindicator? ( dev-libs/libappindicator:3 )
+	gnome-extra/evolution-data-server
+	=net-libs/libringclient-${PVR}
+	networkmanager? ( net-misc/networkmanager )
 	media-libs/clutter-gtk
-	media-gfx/qrencode
+	qrcode? ( media-gfx/qrencode )
 	>=dev-qt/qtcore-5
 	>=dev-qt/qtgui-5
 	>=dev-qt/qtwidgets-5
 	|| ( net-libs/webkit-gtk:4 net-libs/webkit-gtk:3 )
+	sys-devel/gettext
 	x11-themes/gnome-icon-theme
-	gnome-extra/evolution-data-server
-	x11-libs/libnotify
+	libnotify? ( x11-libs/libnotify )
 "
 
 RDEPEND="${DEPEND}"
 
 src_configure() {
+#	BUILD_DIR=${WORKDIR}/build
 	mkdir build
 	cd build
-	cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DGSETTINGS_COMPILE=OFF -DCMAKE_BUILD_TYPE=Release || die "Configure failed"
+#	local mycmakeargs=(
+#		-DENABLE_STATIC="$(usex static-libs true false)"
+#		-DGSETTINGS_COMPILE=OFF
+#		-DCMAKE_INSTALL_PREFIX=/usr
+#		-DCMAKE_BUILD_TYPE=Release
+#	)
+#	cmake-utils_src_configure
+	cmake .. -DENABLE_STATIC="$(usex static-libs true false)" -DCMAKE_INSTALL_PREFIX=/usr -DGSETTINGS_COMPILE=OFF -DCMAKE_BUILD_TYPE=Release || die "Configure failed"
 }
 
 src_compile() {
