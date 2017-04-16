@@ -19,7 +19,7 @@ else
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
 	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-gnutls system-pjproject"
-	KEYWORDS=""
+	KEYWORDS="~amd64"
 
 	S="${WORKDIR}/ring-project/daemon"
 fi
@@ -50,7 +50,7 @@ RDEPEND="system-gnutls? ( >=net-libs/gnutls-3.4.14 )
 	speex? ( >=media-libs/speex-1.2.0 )
 	speexdsp? ( >=media-libs/speexdsp-1.2_rc3 )
 
-	>=net-libs/opendht-9999
+	>=net-libs/opendht-1.3.1
 	>=sys-libs/zlib-1.2.8
 		x11-libs/libva
 

@@ -17,7 +17,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	KEYWORDS=""
+	KEYWORDS="~amd64"
 
 	S=${WORKDIR}/ring-project/lrc/
 fi

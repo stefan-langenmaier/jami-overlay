@@ -50,7 +50,7 @@ RDEPEND="system-gnutls? ( >=net-libs/gnutls-3.4.14 )
 	speex? ( >=media-libs/speex-1.2.0 )
 	speexdsp? ( >=media-libs/speexdsp-1.2_rc3 )
 
-	>=net-libs/opendht-9999
+	>=net-libs/opendht-1.3.1
 	>=sys-libs/zlib-1.2.8
 		x11-libs/libva
 
