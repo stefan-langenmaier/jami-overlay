@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+CMAKE_IN_SOURCE_BUILD="true"
 
 if [[ ${PV} == *99999999* ]]; then
 	inherit kde5
