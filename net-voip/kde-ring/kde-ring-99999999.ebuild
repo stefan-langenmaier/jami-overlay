@@ -29,6 +29,7 @@ LICENSE="GPL-3"
 SLOT="0"
 
 IUSE="akonadi doc +video system-libringclient"
+	# using the system-libringclient currently doesn't work
 
 RDEPEND="
 	$(add_frameworks_dep kcompletion)
