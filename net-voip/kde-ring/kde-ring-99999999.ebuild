@@ -28,9 +28,9 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="akonadi doc +video"
+IUSE="akonadi doc +video system-libringclient"
 
-RDEPEND="net-libs/libringclient[video?]
+RDEPEND="
 	$(add_frameworks_dep kcompletion)
 	$(add_frameworks_dep kconfig)
 	$(add_frameworks_dep kcrash)
@@ -52,6 +52,7 @@ RDEPEND="net-libs/libringclient[video?]
 	$(add_qt_dep qtsvg)
 	$(add_qt_dep qtwidgets)
 	akonadi? ( $(add_kdeapps_dep akonadi) $(add_kdeapps_dep akonadi-contacts) $(add_kdeapps_dep kcontacts) )
+	system-libringclient? ( net-libs/libringclient[video?] )
 "
 
 DEPEND="${RDEPEND}
