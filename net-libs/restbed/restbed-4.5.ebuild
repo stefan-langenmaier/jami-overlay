@@ -7,12 +7,18 @@ inherit cmake-utils
 
 DESCRIPTION="For applications that require seamless and secure communication over HTTP"
 HOMEPAGE="https://github.com/Corvusoft/${PN}"
+if [ "$PV" != "9999" ]; then
+	MY_PV=${PV/_/-} # replace underscore
+	MY_PV=${MY_PV^^} # to uppercase
+	SRC_URI="https://github.com/Corvusoft/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~x86"
 
-inherit git-r3
-# there is no 4.5 release so this is a temporary fix
-EGIT_COMMIT="2c4709c6c1dc657a19f364f8d5d0ada523b6a6cd"
-EGIT_REPO_URI="https://github.com/Corvusoft/${PN}.git"
-KEYWORDS="~amd64"
+	S="${WORKDIR}/${PN}-${MY_PV}"
+else
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/Corvusoft/${PN}.git"
+	KEYWORDS=""
+fi
 
 LICENSE="AGPL-3"
 SLOT="0"
@@ -21,7 +27,7 @@ IUSE="examples ssl static-libs test"
 CMAKE_MIN_VERSION="2.8.10"
 
 RDEPEND="
-	>=dev-cpp/asio-1.10
+	>=dev-cpp/asio-1.11
 	dev-cpp/catch
 	ssl? ( dev-libs/openssl:= )
 	sys-libs/pam
