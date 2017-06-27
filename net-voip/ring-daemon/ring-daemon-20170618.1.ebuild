@@ -109,16 +109,12 @@ src_configure() {
 	echo "PKGS += argon2" >> src/argon2/rules.mak
 
 	# if system library is installed, then bundled will be ignored even with !system-
-	if ! use system-pjproject ; then
-		mkdir -p build
-		cd build
-		../bootstrap || die "Bootstrap of bundled libraries failed"
+	mkdir -p build
+	cd build
+	../bootstrap || die "Bootstrap of bundled libraries failed"
 
-		make || die "Bundled libraries could not be compiled"
-		cd ../..
-	else
-		cd ..
-	fi
+	make || die "Bundled libraries could not be compiled"
+	cd ../..
 
 	# patch jsoncpp include
 	grep -rli '#include <json/json.h>' . | xargs -i@ sed -i 's/#include <json\/json.h>/#include <jsoncpp\/json\/json.h>/g' @
