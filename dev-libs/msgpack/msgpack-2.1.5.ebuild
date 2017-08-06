@@ -1,7 +1,8 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
+
 inherit cmake-multilib
 
 if [[ ${PV} == 9999 ]]; then
@@ -30,9 +31,9 @@ DOCS=( README.md )
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use cxx MSGPACK_ENABLE_CXX)
-		$(cmake-utils_use static-libs MSGPACK_STATIC)
-		$(cmake-utils_use test MSGPACK_BUILD_TESTS)
+	    -DMSGPACK_ENABLE_CXX=$(usex cxx)
+		-DMSGPACK_STATIC=$(usex static-libs)
 	)
+
 	cmake-multilib_src_configure
 }
