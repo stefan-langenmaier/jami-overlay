@@ -14,7 +14,7 @@ if [[ ${PV} == *99999999* ]]; then
 else
 	inherit eutils versionator
 
-	COMMIT_HASH=""
+	COMMIT_HASH="5fcfe3f"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
