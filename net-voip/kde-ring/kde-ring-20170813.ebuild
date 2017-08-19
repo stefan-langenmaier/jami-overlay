@@ -8,15 +8,16 @@ if [[ ${PV} == *99999999* ]]; then
 	inherit kde5
 
 	EGIT_REPO_URI="git://anongit.kde.org/ring-kde"
+	EGIT_COMMIT="23001bde2271a1a38364d1febd7ab49d2b0289c5"
 	SRC_URI=""
 
 	KEYWORDS=""
 else
-	inherit kde5
+	inherit kde5 git-r3
 
-	COMMIT_HASH=""
-	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
-	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
+	EGIT_REPO_URI="git://anongit.kde.org/ring-kde"
+	EGIT_COMMIT="23001bde2271a1a38364d1febd7ab49d2b0289c5"
+	SRC_URI=""
 
 	KEYWORDS="~amd64"
 fi
@@ -55,6 +56,7 @@ RDEPEND="
 	$(add_qt_dep qtwidgets)
 	akonadi? ( $(add_kdeapps_dep akonadi) $(add_kdeapps_dep akonadi-contacts) $(add_kdeapps_dep kcontacts) )
 	system-libringclient? ( net-libs/libringclient[video?] )
+	!system-libringclient? ( !net-libs/libringclient )
 "
 
 DEPEND="${RDEPEND}
