@@ -14,7 +14,7 @@ if [[ ${PV} == *99999999* ]]; then
 else
 	inherit eutils versionator
 
-	COMMIT_HASH=""
+	COMMIT_HASH="5fcfe3f"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
@@ -43,7 +43,7 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
 	>=media-libs/libsamplerate-0.1.8
 	>=media-libs/libsndfile-1.0.25[-minimal]
 
-	!libav? ( >=media-video/ffmpeg-3.3.3[encode,gsm?,iconv,libilbc?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
+	!libav? ( >=media-video/ffmpeg-3.1.3[encode,gsm?,iconv,libilbc?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
 	libav? ( >=media-video/libav-12:0=[encode,gsm?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
 
 	libilbc? ( media-libs/libilbc )
@@ -90,7 +90,7 @@ src_configure() {
 
 	# remove stable unbundled libraries
 	# and folders for other OSes like android
-	rm -r src/{asio,boost,cryptopp,ffmpeg,flac,gcrypt,gnutls,gmp,gpg-error,gsm,iconv,jack,jsoncpp,msgpack,natpmp,nettle,ogg,opendht,opus,pcre,portaudio,pthreads,restbed,samplerate,sndfile,speex,speexdsp,upnp,uuid,vorbis,vpx,x264,yaml-cpp,zlib}
+	rm -r src/{asio,boost,cryptopp,ffmpeg,flac,gcrypt,gnutls,gmp,gpg-error,gsm,iconv,jack,jsoncpp,libav,msgpack,natpmp,nettle,ogg,opendht,opus,pcre,portaudio,pthreads,restbed,samplerate,sndfile,speex,speexdsp,upnp,uuid,vorbis,vpx,x264,yaml-cpp,zlib}
 
 	for DEP in "gmp" "iconv" "nettle" "opus" "speex" "uuid" "vpx" "x264" "zlib"; do
 		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)'${DEP}' $(DEPS_'${DEP}')\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
@@ -108,13 +108,17 @@ src_configure() {
 	# missing dep in argon2
 	echo "PKGS += argon2" >> src/argon2/rules.mak
 
-	# bootstrap
-	mkdir -p build
-	cd build
-	../bootstrap || die "Bootstrap of bundled libraries failed"
+	# if system library is installed, then bundled will be ignored even with !system-
+	if ! use system-pjproject ; then
+		mkdir -p build
+		cd build
+		../bootstrap || die "Bootstrap of bundled libraries failed"
 
-	make || die "Bundled libraries could not be compiled"
-	cd ../..
+		make || die "Bundled libraries could not be compiled"
+		cd ../..
+	else
+		cd ..
+	fi
 
 	# patch jsoncpp include
 	grep -rli '#include <json/json.h>' . | xargs -i@ sed -i 's/#include <json\/json.h>/#include <jsoncpp\/json\/json.h>/g' @

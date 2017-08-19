@@ -9,7 +9,7 @@ DESCRIPTION="Library is provide functionality that not present in the C++ standa
 HOMEPAGE="https://github.com/Corvusoft/kashmir-dependency"
 EGIT_REPO_URI="https://github.com/Corvusoft/${PN}-dependency.git"
 EGIT_COMMIT="2f3913f49c4ac7f9bff9224db5178f6f8f0ff3ee"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 
 LICENSE="Boost-1.0"
 SLOT="0"

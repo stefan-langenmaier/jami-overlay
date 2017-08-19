@@ -14,7 +14,7 @@ if [[ ${PV} == *99999999* ]]; then
 else
 	inherit eutils versionator
 
-	COMMIT_HASH=""
+	COMMIT_HASH="5fcfe3f"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
@@ -43,7 +43,7 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
 	>=media-libs/libsamplerate-0.1.8
 	>=media-libs/libsndfile-1.0.25[-minimal]
 
-	!libav? ( >=media-video/ffmpeg-3.3.3[encode,gsm?,iconv,libilbc?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
+	!libav? ( >=media-video/ffmpeg-3.1.3[encode,gsm?,iconv,libilbc?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
 	libav? ( >=media-video/libav-12:0=[encode,gsm?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
 
 	libilbc? ( media-libs/libilbc )

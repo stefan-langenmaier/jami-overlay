@@ -29,6 +29,7 @@ CMAKE_MIN_VERSION="2.8.10"
 RDEPEND="
 	>=dev-cpp/asio-1.11
 	dev-cpp/catch
+	dev-cpp/kashmir
 	ssl? ( dev-libs/openssl:= )
 	sys-libs/pam
 	sys-libs/zlib
