@@ -1,0 +1,13 @@
+diff --git a/cmake/FetchRing-LRC.cmake b/cmake/FetchRing-LRC.cmake
+index a0975b7..a7763d9 100644
+--- a/cmake/FetchRing-LRC.cmake
++++ b/cmake/FetchRing-LRC.cmake
+@@ -58,6 +58,8 @@ if (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/ring-lrc)
+     execute_process(COMMAND
+         git clone https://github.com/Elv13/ring-lrc.git --branch work5 ${CMAKE_CURRENT_BINARY_DIR}/ring-lrc
+     )
++    file(DOWNLOAD https://raw.githubusercontent.com/savoirfairelinux/ring-daemon/master/src/dring/presence_const.h
++        ${CMAKE_CURRENT_BINARY_DIR}/ring-lrc/presence_const.h INACTIVITY_TIMEOUT 30)
+ else()
+     execute_process(COMMAND
+         /bin/sh -c "cd ${CMAKE_CURRENT_BINARY_DIR}/ring-lrc && git fetch origin && git reset --hard origin/work5"
