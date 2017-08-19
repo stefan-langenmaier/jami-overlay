@@ -59,11 +59,6 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )"
 
-	# temporary fix, until next branch will be merged
-PATCHES=(
-	"${FILESDIR}/cmake_fix.diff"
-)
-
 kde5_src_configure()  {
 		local mycmakeargs=(
 		-DENABLE_VIDEO="$(usex video true false)"
