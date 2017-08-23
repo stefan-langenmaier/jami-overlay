@@ -143,6 +143,7 @@ src_configure() {
 		$(use_enable ipv6 ipv6) \
 		$(use_enable ringns ringns) \
 		$(use_enable vaapi vaapi) \
+		$(use_enable vdpau vdpau) \
 		$(use_enable video video)
 	sed -i.bak 's/LIBS = \(.*\)$/LIBS = \1 -lopus /g' bin/Makefile
 }
