@@ -1,0 +1,2 @@
+# overwrite mask in main gentoo repo, to make repoman happy
+>=dev-libs/msgpack-2.1
