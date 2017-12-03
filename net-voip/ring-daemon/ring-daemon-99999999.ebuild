@@ -51,7 +51,7 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
 	speexdsp? ( >=media-libs/speexdsp-1.2_rc3 )
 
 	>=net-libs/gnutls-3.4.14
-	>=net-libs/opendht-1.4.1
+	>=net-libs/opendht-1.5.0
 	>=sys-libs/zlib-1.2.8
 	x11-libs/libva
 
