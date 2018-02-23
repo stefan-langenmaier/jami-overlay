@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -33,7 +33,8 @@ IUSE="doc +dbus +video static-libs"
 
 DEPEND="dbus? ( =net-voip/ring-daemon-${PVR}[dbus,video] )
 	!dbus? ( =net-voip/ring-daemon-${PVR}[video] )
-	>=dev-qt/qtdbus-5"
+	>=dev-qt/qtdbus-5
+	>=dev-qt/qtsql-5"
 
 RDEPEND="${DEPEND}"
 
