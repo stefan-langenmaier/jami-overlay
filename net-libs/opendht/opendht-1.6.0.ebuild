@@ -9,7 +9,7 @@ inherit eutils versionator git-r3 cmake-utils python-r1
 
 DESCRIPTION="A lightweight C++11 Distributed Hash Table implementation"
 HOMEPAGE="https://github.com/savoirfairelinux/opendht/blob/master/README.md"
-EGIT_REPO_URI="git://github.com/savoirfairelinux/${PN}.git"
+EGIT_REPO_URI="https://github.com/savoirfairelinux/${PN}.git"
 
 if [[ ${PV} == *9999* ]]; then
 	EGIT_BRANCH="master"
