@@ -41,7 +41,7 @@ DEPEND=">=app-text/libebook-0.1.2
 	>=dev-qt/qtcore-5
 	>=dev-qt/qtgui-5
 	>=dev-qt/qtwidgets-5
-	|| ( net-libs/webkit-gtk:4 net-libs/webkit-gtk:3 )
+	net-libs/webkit-gtk:4
 	sys-devel/gettext
 	x11-themes/adwaita-icon-theme
 	libnotify? ( x11-libs/libnotify )

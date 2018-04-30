@@ -3,7 +3,6 @@
 <pkgmetadata>
 <longdescription>Ring daemon</longdescription>
 <use>
-	<flag name="system-gnutls">Uses the system library for gnutls</flag>
 	<flag name="system-pjproject">Uses the system library for pjproject</flag>
 	<flag name="dbus">The D-Bus xml interfaces, and c++ bindings.</flag>
 	<flag name="hwaccel">Enable hardware-accelerated rendering (only vaapi supports at this moment)</flag>
