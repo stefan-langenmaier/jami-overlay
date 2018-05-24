@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -24,7 +24,7 @@ fi
 
 LICENSE="AGPL-3"
 SLOT="0"
-IUSE="examples doc ssl static-libs test"
+IUSE="examples doc libressl ssl static-libs test"
 
 CMAKE_MIN_VERSION="2.8.10"
 
@@ -35,7 +35,10 @@ RDEPEND=">=dev-cpp/asio-9999
 		sys-libs/pam
 		virtual/logger
 	)
-	ssl? ( dev-libs/openssl:= )"
+	ssl? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:0= )
+	)"
 
 DEPEND="${RDEPEND}
 	test? ( dev-cpp/catch )"
