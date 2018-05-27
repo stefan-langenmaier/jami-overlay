@@ -9,7 +9,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
 	KEYWORDS=""
 else
 	inherit eutils versionator
@@ -18,7 +18,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio +pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
 	KEYWORDS="~amd64"
 
 	S="${WORKDIR}/ring-project/daemon"
