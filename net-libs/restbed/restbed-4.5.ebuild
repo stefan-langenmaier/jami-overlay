@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -22,15 +22,21 @@ fi
 
 LICENSE="AGPL-3"
 SLOT="0"
-IUSE="examples ssl static-libs test"
+IUSE="examples libressl ssl static-libs test"
 
 CMAKE_MIN_VERSION="2.8.10"
 
 RDEPEND="
-	>=dev-cpp/asio-1.11
+	!libressl? ( >=dev-cpp/asio-1.11 )
 	dev-cpp/catch
 	dev-cpp/kashmir
-	ssl? ( dev-libs/openssl:= )
+	ssl? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? (
+			dev-libs/libressl:0=
+			>=dev-cpp/asio-1.12
+		)
+	)
 	sys-libs/pam
 	sys-libs/zlib
 "
