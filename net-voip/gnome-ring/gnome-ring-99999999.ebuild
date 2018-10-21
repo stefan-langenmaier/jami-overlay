@@ -37,6 +37,7 @@ DEPEND=">=app-text/libebook-0.1.2
 	=net-libs/libringclient-${PVR}
 	networkmanager? ( net-misc/networkmanager )
 	media-libs/clutter-gtk
+	media-libs/libcanberra
 	qrcode? ( media-gfx/qrencode )
 	>=dev-qt/qtcore-5
 	>=dev-qt/qtgui-5
