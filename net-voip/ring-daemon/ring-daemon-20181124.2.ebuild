@@ -12,7 +12,7 @@ if [[ ${PV} == *99999999* ]]; then
 	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
 	KEYWORDS=""
 else
-	inherit eutils versionator
+	inherit eutils
 
 	COMMIT_HASH="3fab93c"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
@@ -31,7 +31,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
+RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 
 	>=dev-cpp/yaml-cpp-0.5.3
 

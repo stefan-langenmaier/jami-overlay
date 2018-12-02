@@ -34,7 +34,7 @@ IUSE="-appindicator +libnotify networkmanager +qrcode static-libs"
 DEPEND=">=app-text/libebook-0.1.2
 	appindicator? ( dev-libs/libappindicator:3 )
 	gnome-extra/evolution-data-server
-	=net-libs/libringclient-${PVR}
+	~net-libs/libringclient-${PVR}
 	networkmanager? ( net-misc/networkmanager )
 	media-libs/clutter-gtk
 	media-libs/libcanberra

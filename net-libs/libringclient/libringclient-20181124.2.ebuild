@@ -31,8 +31,8 @@ SLOT="0"
 
 IUSE="doc +dbus +video static-libs"
 
-DEPEND="dbus? ( =net-voip/ring-daemon-${PVR}[dbus,video] )
-	!dbus? ( =net-voip/ring-daemon-${PVR}[video] )
+DEPEND="dbus? ( ~net-voip/ring-daemon-${PVR}[dbus,video] )
+	!dbus? ( ~net-voip/ring-daemon-${PVR}[video] )
 	>=dev-qt/qtdbus-5
 	>=dev-qt/qtsql-5"
 

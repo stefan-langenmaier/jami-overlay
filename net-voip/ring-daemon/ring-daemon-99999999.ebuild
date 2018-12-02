@@ -9,16 +9,16 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
 	KEYWORDS=""
 else
-	inherit eutils versionator
+	inherit eutils
 
 	COMMIT_HASH=""
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vorbis +vpx +x264 system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
 	KEYWORDS="~amd64"
 
 	S="${WORKDIR}/ring-project/daemon"
@@ -31,7 +31,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
+RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 
 	>=dev-cpp/yaml-cpp-0.5.3
 
@@ -40,11 +40,8 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
 	dev-libs/dbus-c++
 	>=dev-libs/jsoncpp-1.7.2
 
-	>=media-libs/libsamplerate-0.1.8
-	>=media-libs/libsndfile-1.0.25[-minimal]
-
-	!libav? ( >=media-video/ffmpeg-3.4[encode,gsm?,iconv,libilbc?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
-	libav? ( >=media-video/libav-12:0=[encode,gsm?,opus?,speex?,v4l,vaapi?,vdpau?,vorbis?,vpx?,x264?,zlib] )
+	!libav? ( >=media-video/ffmpeg-3.4[encode,gsm?,iconv,libilbc?,opus?,speex?,v4l,vaapi?,vdpau?,vpx?,x264?,zlib] )
+	libav? ( >=media-video/libav-12:0=[encode,gsm?,opus?,speex?,v4l,vaapi?,vdpau?,vpx?,x264?,zlib] )
 
 	libilbc? ( media-libs/libilbc )
 	speex? ( >=media-libs/speex-1.2.0 )
@@ -58,7 +55,7 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5:2/9999 )
 	alsa? ( media-libs/alsa-lib )
 	jack? ( virtual/jack )
 	portaudio? ( >=media-libs/portaudio-19_pre20140130 )
-	pulseaudio? ( media-sound/pulseaudio[alsa?,libsamplerate] )
+	pulseaudio? ( media-sound/pulseaudio[alsa?] )
 
 	dbus? ( dev-libs/dbus-c++ )
 	ringns? ( >=net-libs/restbed-4.5 )
@@ -90,7 +87,7 @@ src_configure() {
 
 	# remove stable unbundled libraries
 	# and folders for other OSes like android
-	rm -r src/{asio,ffmpeg,flac,gcrypt,gnutls,gmp,gpg-error,gsm,iconv,jack,jsoncpp,msgpack,natpmp,nettle,ogg,opendht,opus,pcre,portaudio,pthreads,restbed,samplerate,sndfile,speex,speexdsp,upnp,uuid,vorbis,vpx,x264,yaml-cpp,zlib}
+	rm -r src/{asio,ffmpeg,gcrypt,gnutls,gmp,gpg-error,gsm,iconv,jack,jsoncpp,msgpack,natpmp,nettle,opendht,opus,pcre,portaudio,pthreads,restbed,speex,speexdsp,upnp,uuid,vpx,x264,yaml-cpp,zlib}
 
 	for DEP in "gmp" "iconv" "nettle" "opus" "speex" "uuid" "vpx" "x264" "zlib"; do
 		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)'${DEP}' $(DEPS_'${DEP}')\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
