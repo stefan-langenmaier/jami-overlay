@@ -28,7 +28,7 @@ CMAKE_MIN_VERSION="2.8.10"
 
 RDEPEND="
 	!libressl? ( >=dev-cpp/asio-1.11 )
-	dev-cpp/catch
+	dev-cpp/catch:0=
 	dev-cpp/kashmir
 	ssl? (
 		!libressl? ( dev-libs/openssl:0= )
