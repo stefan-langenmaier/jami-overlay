@@ -14,7 +14,7 @@ if [[ ${PV} == *99999999* ]]; then
 else
 	inherit eutils
 
-	COMMIT_HASH=""
+	COMMIT_HASH="e3a1ec5"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
@@ -48,7 +48,7 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 	speexdsp? ( >=media-libs/speexdsp-1.2_rc3 )
 
 	>=net-libs/gnutls-3.4.14
-	>=net-libs/opendht-1.10.1
+	>=net-libs/opendht-1.9.5
 	>=sys-libs/zlib-1.2.8
 	x11-libs/libva
 
