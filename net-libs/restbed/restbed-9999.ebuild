@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,8 +13,8 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_SUBMODULES=()
 	KEYWORDS=""
 else
-	inherit versionator
-	MY_PV=$(replace_version_separator 2 '-')
+	inherit eapi7-ver
+	MY_PV=$(ver_rs 2 '-')
 	MY_P=${PN}-${MY_PV}
 
 	SRC_URI="https://github.com/Corvusoft/${PN}/archive/${MY_PV^^}.tar.gz -> ${MY_P}.tar.gz"
