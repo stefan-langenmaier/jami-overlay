@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -63,8 +63,8 @@ src_configure() {
 #	cmake-utils_src_configure
 	cmake .. -DENABLE_STATIC="$(usex static-libs true false)" -DCMAKE_INSTALL_PREFIX=/usr -DGSETTINGS_COMPILE=OFF -DCMAKE_BUILD_TYPE=Release || die "Configure failed"
 
-        # fix sandbox violation
-        sed -i 's/EXECUTE_PROCESS/#NOOP/' cmake_install.cmake
+	# fix sandbox violation
+	sed -i 's/EXECUTE_PROCESS/#NOOP/' cmake_install.cmake
 }
 
 src_compile() {
