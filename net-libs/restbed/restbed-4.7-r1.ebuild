@@ -38,8 +38,8 @@ RDEPEND=">=dev-cpp/asio-1.12
 		virtual/logger
 	)
 	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
+		!libressl? ( dev-libs/openssl:0=[static-libs] )
+		libressl? ( dev-libs/libressl:0=[static-libs] )
 	)"
 
 DEPEND="${RDEPEND}"
