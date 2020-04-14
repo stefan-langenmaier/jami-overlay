@@ -4,14 +4,14 @@
 EAPI=7
 
 if [[ ${PV} == *99999999* ]]; then
-	inherit eutils git-r3 cmake-utils gnome2-utils
+	inherit eutils git-r3 cmake-utils gnome2-utils xdg-utils
 
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-client-gnome"
 	SRC_URI=""
 
 	KEYWORDS=""
 else
-	inherit eutils cmake-utils gnome2-utils
+	inherit eutils cmake-utils gnome2-utils xdg-utils
 
 	COMMIT_HASH="7138e43"
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
@@ -83,10 +83,10 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_schemas_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
 	gnome2_schemas_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }

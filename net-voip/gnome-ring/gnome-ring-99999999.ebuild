@@ -1,17 +1,17 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 if [[ ${PV} == *99999999* ]]; then
-	inherit eutils git-r3 cmake-utils gnome2-utils
+	inherit eutils git-r3 cmake-utils gnome2-utils xdg-utils
 
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-client-gnome"
 	SRC_URI=""
 
 	KEYWORDS=""
 else
-	inherit eutils cmake-utils gnome2-utils
+	inherit eutils cmake-utils gnome2-utils xdg-utils
 
 	COMMIT_HASH=""
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
@@ -80,10 +80,10 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_schemas_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
 	gnome2_schemas_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
