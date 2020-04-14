@@ -1,0 +1,44 @@
+diff --git a/source/corvusoft/restbed/detail/service_impl.cpp b/source/corvusoft/restbed/detail/service_impl.cpp
+index 6772af1..65e4fa3 100644
+--- a/source/corvusoft/restbed/detail/service_impl.cpp
++++ b/source/corvusoft/restbed/detail/service_impl.cpp
+@@ -147,7 +147,7 @@ namespace restbed
+         
+         void ServiceImpl::http_listen( void ) const
+         {
+-            auto socket = make_shared< tcp::socket >( m_acceptor->get_io_service( ) );
++            auto socket = make_shared< tcp::socket >( m_acceptor->get_executor() );
+             m_acceptor->async_accept( *socket, bind( &ServiceImpl::create_session, this, socket, _1 ) );
+         }
+         
+@@ -273,7 +273,7 @@ namespace restbed
+         
+         void ServiceImpl::https_listen( void ) const
+         {
+-            auto socket = make_shared< asio::ssl::stream< tcp::socket > >( m_ssl_acceptor->get_io_service( ), *m_ssl_context );
++            auto socket = make_shared< asio::ssl::stream< tcp::socket > >( m_ssl_acceptor->get_executor(), *m_ssl_context );
+             m_ssl_acceptor->async_accept( socket->lowest_layer( ), bind( &ServiceImpl::create_ssl_session, this, socket, _1 ) );
+         }
+         
+diff --git a/source/corvusoft/restbed/detail/socket_impl.cpp b/source/corvusoft/restbed/detail/socket_impl.cpp
+index fac0082..9e83503 100644
+--- a/source/corvusoft/restbed/detail/socket_impl.cpp
++++ b/source/corvusoft/restbed/detail/socket_impl.cpp
+@@ -54,7 +54,7 @@ namespace restbed
+             m_pending_writes( ),
+             m_logger( logger ),
+             m_timeout( 0 ),
+-            m_io_service( socket->get_io_service( ) ),
++            m_io_service( static_cast<asio::io_context&>(socket->get_executor().context()) ),
+             m_timer( make_shared< asio::steady_timer >( m_io_service ) ),
+             m_strand( make_shared< io_service::strand > ( m_io_service ) ),
+             m_resolver( nullptr ),
+@@ -71,7 +71,7 @@ namespace restbed
+             m_pending_writes( ),
+             m_logger( logger ),
+             m_timeout( 0 ),
+-            m_io_service( socket->get_io_service( ) ),
++            m_io_service( static_cast<asio::io_context&>(socket->get_executor().context()) ),
+             m_timer( make_shared< asio::steady_timer >( m_io_service ) ),
+             m_strand( make_shared< io_service::strand > ( m_io_service ) ),
+             m_resolver( nullptr ),
