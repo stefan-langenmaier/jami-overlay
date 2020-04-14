@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,7 +9,7 @@ if [[ ${PV} == *99999999* ]]; then
 	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
 	SRC_URI=""
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
 	KEYWORDS=""
 else
 	inherit eutils
@@ -18,7 +18,7 @@ else
 	MY_SRC_P="ring_${PV}.${COMMIT_HASH}"
 	SRC_URI="https://dl.ring.cx/ring-release/tarballs/${MY_SRC_P}.tar.gz"
 
-	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
+	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
 	KEYWORDS="~amd64"
 
 	S="${WORKDIR}/ring-project/daemon"
@@ -34,6 +34,7 @@ SLOT="0"
 RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 
 	>=dev-cpp/yaml-cpp-0.5.3
+	dev-libs/msgpack
 
 	>=dev-libs/boost-1.61.0
 	>=dev-libs/crypto++-5.6.5
@@ -60,7 +61,6 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 
 	dbus? ( dev-libs/dbus-c++ )
 	ringns? ( >=net-libs/restbed-4.5 )
-	restbed? ( >=net-libs/restbed-4.5 )
 	sdes? ( >=dev-libs/libpcre-8.40 )
 	video? ( virtual/libudev )
 
@@ -76,9 +76,7 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="dbus? ( sdes )
 	graph? ( doc )
 	hwaccel? ( video )
-	restbed? ( sdes video )
-	vaapi? ( hwaccel )
-	?? ( dbus restbed )"
+	vaapi? ( hwaccel )"
 
 src_configure() {
 	rm -rf ../client-*
@@ -87,7 +85,7 @@ src_configure() {
 
 	# remove stable unbundled libraries
 	# and folders for other OSes like android
-	rm -r src/{asio,ffmpeg,gcrypt,gnutls,gmp,gpg-error,gsm,iconv,jack,jsoncpp,msgpack,natpmp,nettle,opus,pcre,portaudio,pthreads,restbed,speex,speexdsp,uuid,vpx,x264,yaml-cpp,zlib}
+	rm -r src/{asio,ffmpeg,gcrypt,gnutls,gmp,gpg-error,gsm,iconv,jack,jsoncpp,msgpack,natpmp,nettle,opus,portaudio,pthreads,speex,speexdsp,uuid,vpx,x264,yaml-cpp,zlib}
 
 	for DEP in "asio" "gmp" "iconv" "nettle" "opus" "speex" "uuid" "vpx" "x264" "zlib"; do
 		sed -i.bak 's/^DEPS_\(.*\) = \(.*\)'${DEP}' $(DEPS_'${DEP}')\(.*\)/DEPS_\1 = \2 \3/g' src/*/rules.mak
@@ -129,7 +127,6 @@ src_configure() {
 		$(use_with opus opus) \
 		$(use_with portaudio portaudio) \
 		$(use_with pulseaudio pulse ) \
-		$(use_with restbed restcpp) \
 		$(use_with sdes sdes) \
 		$(use_with speex speex) \
 		$(use_with speexdsp speexdsp) \
