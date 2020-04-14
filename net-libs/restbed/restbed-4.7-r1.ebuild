@@ -28,22 +28,24 @@ IUSE="examples doc libressl ssl static-libs test"
 
 CMAKE_MIN_VERSION="2.8.10"
 
-RDEPEND="~dev-cpp/asio-1.12.2
+RDEPEND=">=dev-cpp/asio-1.12.2
 	dev-cpp/kashmir
 	sys-libs/zlib
+	dev-cpp/catch:=
 	examples? (
 		sys-libs/pam
 		virtual/logger
 	)
 	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
+		!libressl? ( dev-libs/openssl:0=[static-libs] )
+		libressl? ( dev-libs/libressl:0=[static-libs] )
 	)"
 
-DEPEND="${RDEPEND}
-	test? ( dev-cpp/catch )"
+DEPEND="${RDEPEND}"
 
 src_prepare() {
+	eapply "${FILESDIR}/${P}-r1-fix_boost.patch"
+
 	if use doc ; then DOCS=( README.md
 		documentation/API.md
 		documentation/DESIGN.md
