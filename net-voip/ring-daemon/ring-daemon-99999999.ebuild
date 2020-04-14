@@ -1,12 +1,12 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 if [[ ${PV} == *99999999* ]]; then
 	inherit eutils git-r3
 
-	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-daemon"
+	EGIT_REPO_URI="https://git.jami.net/savoirfairelinux/ring-daemon.git"
 	SRC_URI=""
 
 	IUSE="+alsa +dbus doc graph +gsm +hwaccel ipv6 jack -libav +libilbc +nat-pmp +opus portaudio pulseaudio -restbed +ringns +sdes +speex +speexdsp +upnp +vaapi vdpau +video +vpx +x264 system-pjproject"
@@ -24,8 +24,8 @@ else
 	S="${WORKDIR}/ring-project/daemon"
 fi
 
-DESCRIPTION="Ring daemon"
-HOMEPAGE="https://tuleap.ring.cx/projects/ring"
+DESCRIPTION="Jami (formerly Ring) daemon"
+HOMEPAGE="https://jami.net/"
 
 LICENSE="GPL-3"
 

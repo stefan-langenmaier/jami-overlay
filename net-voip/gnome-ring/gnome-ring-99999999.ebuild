@@ -1,12 +1,12 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 if [[ ${PV} == *99999999* ]]; then
 	inherit eutils git-r3 cmake-utils gnome2-utils xdg-utils
 
-	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-client-gnome"
+	EGIT_REPO_URI="https://git.jami.net/savoirfairelinux/ring-client-gnome.git"
 	SRC_URI=""
 
 	KEYWORDS=""
@@ -22,8 +22,8 @@ else
 	S=${WORKDIR}/ring-project/client-gnome
 fi
 
-DESCRIPTION="Gnome Ring client"
-HOMEPAGE="https://tuleap.ring.cx/projects/ring"
+DESCRIPTION="Gnome Jami client (formerly Ring)"
+HOMEPAGE="https://jami.net/"
 
 LICENSE="GPL-3"
 

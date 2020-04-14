@@ -1,12 +1,12 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 if [[ ${PV} == *99999999* ]]; then
 	inherit eutils git-r3 cmake-utils
 
-	EGIT_REPO_URI="https://gerrit-ring.savoirfairelinux.com/ring-lrc"
+	EGIT_REPO_URI="https://git.jami.net/savoirfairelinux/ring-lrc.git"
 	SRC_URI=""
 
 	KEYWORDS=""
@@ -22,8 +22,8 @@ else
 	S=${WORKDIR}/ring-project/lrc/
 fi
 
-DESCRIPTION="libringclient is the common interface for Ring applications"
-HOMEPAGE="https://tuleap.ring.cx/projects/ring"
+DESCRIPTION="libringclient is the common interface for Jami (formerly Ring) applications"
+HOMEPAGE="https://jami.net/"
 
 LICENSE="GPL-3"
 
