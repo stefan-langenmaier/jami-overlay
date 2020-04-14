@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit cmake-utils
 
@@ -13,7 +13,6 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_SUBMODULES=()
 	KEYWORDS=""
 else
-	inherit eapi7-ver
 	MY_PV=$(ver_rs 2 '-')
 	MY_P=${PN}-${MY_PV}
 
@@ -29,7 +28,7 @@ IUSE="examples doc libressl ssl static-libs test"
 
 CMAKE_MIN_VERSION="2.8.10"
 
-RDEPEND=">=dev-cpp/asio-1.12
+RDEPEND=">=dev-cpp/asio-1.12.2
 	dev-cpp/kashmir
 	sys-libs/zlib
 	examples? (
