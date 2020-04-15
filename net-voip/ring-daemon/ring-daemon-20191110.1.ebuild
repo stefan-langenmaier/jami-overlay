@@ -52,7 +52,7 @@ RDEPEND="system-pjproject? ( >=net-libs/pjproject-2.5.5 )
 	>=sys-libs/zlib-1.2.8
 	x11-libs/libva
 
-	!net-libs/opendht
+	!!net-libs/opendht
 
 	alsa? ( media-libs/alsa-lib )
 	jack? ( virtual/jack )
