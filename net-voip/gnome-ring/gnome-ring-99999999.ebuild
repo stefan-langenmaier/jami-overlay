@@ -29,7 +29,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="-appindicator +libnotify networkmanager +qrcode static-libs"
+IUSE="-appindicator +libnotify networkmanager +qrcode static"
 
 DEPEND=">=app-text/libebook-0.1.2
 	appindicator? ( dev-libs/libappindicator:3 )
@@ -61,7 +61,7 @@ src_configure() {
 #		-DCMAKE_BUILD_TYPE=Release
 #	)
 #	cmake-utils_src_configure
-	cmake .. -DENABLE_STATIC="$(usex static-libs true false)" -DCMAKE_INSTALL_PREFIX=/usr -DGSETTINGS_COMPILE=OFF -DCMAKE_BUILD_TYPE=Release || die "Configure failed"
+	cmake .. -DENABLE_STATIC="$(usex static true false)" -DCMAKE_INSTALL_PREFIX=/usr -DGSETTINGS_COMPILE=OFF -DCMAKE_BUILD_TYPE=Release || die "Configure failed"
 }
 
 src_compile() {

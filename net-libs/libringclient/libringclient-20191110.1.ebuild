@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -29,7 +29,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 
-IUSE="doc +dbus +video static-libs"
+IUSE="doc +dbus +video static"
 
 DEPEND="dbus? ( ~net-voip/ring-daemon-${PVR}[dbus,video] )
 	!dbus? ( ~net-voip/ring-daemon-${PVR}[video] )
@@ -41,7 +41,7 @@ RDEPEND="${DEPEND}"
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_VIDEO="$(usex video true false)"
-		-DENABLE_STATIC="$(usex static-libs true false)"
+		-DENABLE_STATIC="$(usex static true false)"
 		-DENABLE_LIBWRAP="$(usex !dbus true false)"
 		-DCMAKE_INSTALL_PREFIX=/usr
 		-DCMAKE_BUILD_TYPE=Release
